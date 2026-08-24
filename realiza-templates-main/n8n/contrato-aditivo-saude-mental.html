@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Termo Aditivo · Saúde Mental · {{razao_social}} · Realiza</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#007276; --teal-dark:#005F62; --teal-deeper:#004448;
+    --teal-tint:#E0F2F3; --gold:#FFC000; --gold-soft:#FFF4CC;
+    --offwhite:#FAFAF7; --paper:#F5F5F2; --hairline:#ECECEC;
+    --divider:#E5E5E5; --mute:#BFBFBF;
+    --ink-1:#1A1A1A; --ink-2:#555555; --ink-3:#8A8A8A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-family:'Montserrat',Arial,Helvetica,sans-serif;color:var(--ink-1);background:#e8e8e8;-webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  .page{
+    width:210mm; height:297mm; position:relative; overflow:hidden;
+    background:#fff; margin:0 auto;
+    page-break-after:always; break-after:page; clip-path:inset(0);
+  }
+  .page:last-of-type{page-break-after:auto;break-after:auto}
+  .page:last-child{page-break-after:auto;break-after:auto}
+
+  /* Fixed full-bleed pages (cover + resumo) keep zero page margin */
+  .page.cover, .page.resumo{page:fullbleed}
+  @page fullbleed{size:A4 portrait;margin:0}
+
+  /* Default printed page: real margins so flowing content never hits the edge */
+  @page{size:A4;margin:15mm 14mm 16mm 14mm}
+
+  /* ===== FLOWING SECTIONS (clausulas + assinatura + anexos) ===== */
+  /* Let content flow and paginate naturally; no fixed height, no clipping,
+     no absolutely-positioned footer that could overlap the text. */
+  .page.flow{
+    width:auto; height:auto; min-height:0; overflow:visible;
+    position:static; clip-path:none;
+    background:#fff; margin:0 auto;
+    page-break-after:auto; break-after:auto;
+  }
+  .page.flow .footer-bar{display:none}
+  .page.flow .watermark{display:none}
+  .page.flow .gold-band{position:static;height:6mm;width:100%}
+  .page.flow .brand-mark{display:none}
+  /* Each flow section that should start a fresh page */
+  .flow.break{break-before:page;page-break-before:always}
+  /* Keep clause units and cards from splitting awkwardly across pages */
+  .clause-title{break-inside:avoid}
+  .clause-section{break-after:avoid}
+
+  @media print{body{background:#fff} .page{margin:0;box-shadow:none;height:297mm}
+    .page.flow{height:auto;min-height:0}
+  }
+
+  /* chrome */
+  .gold-band{position:absolute;top:0;left:0;right:0;height:6mm;background:var(--gold);z-index:2}
+  .watermark{position:absolute;right:-30mm;bottom:-35mm;height:140mm;opacity:.05;pointer-events:none;z-index:0}
+  .brand-mark{position:absolute;top:14mm;right:14mm;height:10mm;z-index:3}
+  .footer-bar{
+    position:absolute;left:14mm;right:14mm;bottom:10mm;display:flex;justify-content:space-between;
+    font-size:9pt;color:var(--ink-3);font-weight:600;letter-spacing:.16em;text-transform:uppercase;z-index:3;
+    padding-top:3mm;border-top:1px solid var(--hairline);
+  }
+  .footer-bar .brand-mini{color:var(--teal);font-weight:700}
+
+  /* type */
+  .eyebrow{font-size:9pt;font-weight:700;letter-spacing:.22em;color:var(--teal);text-transform:uppercase}
+  h1.title{font-weight:800;font-size:21pt;line-height:1.08;color:var(--teal-deeper);letter-spacing:-0.02em;margin:1.5mm 0 2mm;text-wrap:pretty}
+  .lead{font-size:11pt;line-height:1.55;color:var(--ink-2);max-width:170mm;margin:0}
+  .pad-top{padding:12mm 14mm 0}
+
+  /* ===== PAGE 1 · COVER ===== */
+  .cover .gold-band{height:9mm}
+  .cover-block-gold{position:absolute;right:-6mm;top:160mm;width:88mm;height:96mm;background:var(--gold);border-radius:5mm;transform:rotate(-4deg);z-index:0}
+  .cover-block-img{position:absolute;right:14mm;top:152mm;width:88mm;height:96mm;background:var(--teal-deeper);border-radius:4mm;z-index:1;overflow:hidden}
+  .cover-block-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;opacity:.85}
+  .cover-block-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,68,72,.25) 0%, rgba(0,68,72,.55) 100%);pointer-events:none}
+  .cover-content{position:absolute;left:14mm;top:34mm;right:14mm;z-index:2}
+  .cover-logo{height:13mm;margin-bottom:14mm}
+  .cover .title-big{font-weight:800;font-size:42pt;line-height:1.02;color:var(--teal-deeper);letter-spacing:-0.02em;margin:4mm 0 5mm;max-width:185mm}
+  .cover .title-big .gold{color:var(--gold-dark, #B8860B);background:linear-gradient(transparent 70%, var(--gold) 70%);padding:0 4px}
+  .cover .subtitle{font-size:13pt;line-height:1.5;color:var(--ink-2);max-width:165mm}
+  .cover .tag{display:inline-block;margin-top:6mm;padding:3mm 6mm;background:var(--teal-deeper);color:#fff;border-radius:999px;font-weight:700;letter-spacing:.16em;font-size:10pt}
+  .cover-foot{position:absolute;left:14mm;right:14mm;bottom:24mm;display:flex;justify-content:space-between;gap:8mm;z-index:2}
+  .cover-foot .field-label{font-size:8pt;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin-bottom:1.5mm}
+  .cover-foot .field-value{font-size:11pt;color:var(--ink-1);font-weight:700}
+  .cover-foot .client-name{font-size:14pt;color:var(--teal-deeper);font-weight:800}
+
+  /* ===== PAGE 2 · DADOS + ESCOPO ===== */
+  .client-card{
+    margin-top:6mm;border:1px solid var(--hairline);border-radius:3.5mm;padding:6mm 7mm;background:var(--offwhite);
+  }
+  .client-card .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm 7mm}
+  .client-card .field-label{font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin-bottom:1mm}
+  .client-card .field-value{font-size:11pt;font-weight:700;color:var(--ink-1)}
+  .client-card .field-value.teal{color:var(--teal-deeper)}
+
+  .scope-list{margin-top:6mm;display:grid;grid-template-columns:1fr 1fr;gap:3mm 5mm}
+  .scope-item{display:flex;align-items:flex-start;gap:3mm;padding:3mm 4mm;background:#fff;border:1px solid var(--hairline);border-radius:2.5mm;border-left:1.3mm solid var(--gold)}
+  .scope-item.muted{background:var(--offwhite);border-left-color:var(--mute);opacity:.6}
+  .scope-item .check{
+    width:6mm;height:6mm;min-width:6mm;border-radius:1.5mm;background:var(--teal);color:#fff;font-size:11pt;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .scope-item.muted .check{background:var(--mute)}
+  .scope-item .text strong{color:var(--teal-deeper);font-size:10.5pt;font-weight:800;display:block;line-height:1.25}
+  .scope-item .text small{display:block;font-size:8.5pt;color:var(--ink-2);margin-top:.7mm;line-height:1.4}
+
+  .obs-card{margin-top:6mm;background:var(--teal-tint);border-left:1.3mm solid var(--teal);border-radius:2.5mm;padding:5mm 6mm}
+  .obs-card .kk{font-size:8pt;font-weight:700;letter-spacing:.16em;color:var(--teal);text-transform:uppercase;margin-bottom:1.5mm;display:block}
+  .obs-card p{font-size:10pt;line-height:1.55;color:var(--ink-1);margin:0}
+
+  /* ===== PAGE 3 · PROGRAMAS E LAUDOS ===== */
+  .docs-grid{margin-top:6mm;display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+  .doc-card{background:#fff;border:1px solid var(--hairline);border-top:1.3mm solid var(--teal);border-radius:3.5mm;padding:5.5mm 6mm}
+  .doc-card .k{font-size:7.5pt;font-weight:700;letter-spacing:.14em;color:var(--teal);text-transform:uppercase;margin-bottom:1.5mm;display:block}
+  .doc-card h3{font-size:12pt;font-weight:800;color:var(--teal-deeper);margin:0 0 2.5mm;line-height:1.2}
+  .doc-card p{font-size:9pt;line-height:1.5;color:var(--ink-2);margin:0 0 3mm}
+  .doc-card ul{margin:0;padding:0;list-style:none}
+  .doc-card ul li{font-size:8.5pt;color:var(--ink-2);line-height:1.45;padding-left:5mm;position:relative;margin-bottom:1.2mm}
+  .doc-card ul li::before{content:"\2713";position:absolute;left:0;top:0;color:var(--teal);font-weight:700}
+
+  /* ===== PAGE 5 · INVESTIMENTO ===== */
+  .compare-grid{margin-top:7mm;display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+  .compare-card{
+    border:1px solid var(--hairline);border-radius:4mm;padding:7mm 7mm;background:#fff;position:relative;
+  }
+  .compare-card.avulso{border-left:1.3mm solid var(--mute)}
+  .compare-card.misto{border-left:1.3mm solid var(--gold)}
+  .compare-card.plano{border:.7mm solid var(--teal);background:var(--teal-tint)}
+  .compare-card .badge{
+    position:absolute;top:-3mm;right:6mm;background:var(--gold);color:var(--teal-deeper);
+    font-size:7.5pt;font-weight:800;letter-spacing:.12em;padding:1.5mm 4mm;border-radius:999px;text-transform:uppercase;
+  }
+  .compare-card h4{font-size:8.5pt;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:2mm}
+  .compare-card.avulso h4{color:var(--ink-3)}
+  .compare-card.misto h4{color:var(--gold-dark, var(--gold))}
+  .compare-card .price{font-size:24pt;font-weight:800;color:var(--teal-deeper);line-height:1.05;margin:1.5mm 0 1mm;font-variant-numeric:tabular-nums}
+  .compare-card.avulso .price{color:var(--ink-1)}
+  .compare-card.misto .price{color:var(--ink-1)}
+  .compare-card .price-sub{font-size:8.5pt;color:var(--ink-3);margin-bottom:4mm}
+  .compare-card ul{list-style:none;margin-top:3mm}
+  .compare-card ul li{font-size:9pt;line-height:1.5;color:var(--ink-2);padding:1mm 0 1mm 5mm;position:relative}
+  .compare-card ul li::before{content:'\2713';position:absolute;left:0;color:var(--teal);font-weight:700}
+  .compare-card.avulso ul li::before{content:'\2022';color:var(--mute);font-size:11pt;line-height:.7}
+  .compare-card ul li b{color:var(--teal-deeper)}
+  .compare-grid:has(> .compare-card.solo:only-child){grid-template-columns:minmax(0, 110mm);justify-content:center}
+  .compare-card.solo{max-width:110mm;margin:0 auto}
+
+  .terms-card{margin-top:6mm;background:var(--teal-tint);border-radius:3mm;padding:4.5mm 5mm}
+  .terms-card .kk{font-size:7.5pt;font-weight:700;letter-spacing:.14em;color:var(--teal);text-transform:uppercase;display:block;margin-bottom:2mm}
+  .terms-card ul{list-style:none}
+  .terms-card ul li{font-size:9pt;color:var(--ink-2);line-height:1.5;padding-left:4mm;position:relative;margin-bottom:1mm}
+  .terms-card ul li::before{content:"";position:absolute;left:0;top:2mm;width:2mm;height:.5mm;background:var(--gold)}
+  .terms-card ul li b{color:var(--ink-1)}
+
+  /* ===== ACEITE ===== */
+  .accept-card{
+    margin-top:4mm;background:var(--offwhite);border:1px solid var(--hairline);border-radius:4mm;padding:6mm 7mm;
+  }
+  .accept-card .kk{font-size:8.5pt;font-weight:700;letter-spacing:.18em;color:var(--teal);text-transform:uppercase}
+  .accept-card h3{font-size:14pt;font-weight:800;color:var(--teal-deeper);margin:1.5mm 0 3mm}
+  .accept-card p{font-size:10pt;color:var(--ink-2);line-height:1.6;margin:0 0 4mm}
+  .accept-card p b{color:var(--ink-1)}
+  .sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:10mm;margin-top:3mm}
+  .sig-block{text-align:center}
+  .sig-block .line{border-top:.5mm solid var(--ink-1);margin:9mm 0 2mm}
+  .sig-block .name{font-size:10pt;color:var(--ink-1);font-weight:700}
+  .sig-block .label{font-size:8pt;color:var(--ink-2);margin-top:.7mm}
+  .accept-card .date-line{text-align:center;font-size:8.5pt;color:var(--ink-3);margin-top:5mm;letter-spacing:.08em}
+
+  /* ===== CORPO DO CONTRATO (clausulas) ===== */
+  .contract-body{padding:24mm 18mm 26mm}
+  .contract-body .doc-eyebrow{font-size:8.5pt;font-weight:700;letter-spacing:.2em;color:var(--teal);text-transform:uppercase}
+  .contract-body h1.contract-title{font-weight:800;font-size:20pt;line-height:1.12;color:var(--teal-deeper);letter-spacing:-0.01em;margin:2mm 0 5mm}
+  .clause-section{font-size:11pt;font-weight:800;letter-spacing:.04em;color:var(--teal-deeper);text-transform:uppercase;margin:6mm 0 2mm;line-height:1.25}
+  .clause-section:first-of-type{margin-top:0}
+  .clause-title{font-size:10pt;font-weight:800;color:var(--teal);margin:4mm 0 1mm;line-height:1.3}
+  .clause-body{font-size:9.5pt;line-height:1.55;color:var(--ink-1);margin:0 0 2mm;text-align:justify}
+  .clause-body b{color:var(--teal-deeper)}
+  .clause-num{font-weight:800;color:var(--teal-deeper)}
+  .clause-list{margin:0 0 2mm 0;padding-left:7mm}
+  .clause-list li{font-size:9.5pt;line-height:1.5;color:var(--ink-1);margin-bottom:1mm;text-align:justify}
+  .sub-list{margin:1mm 0 2mm 4mm;padding-left:6mm;list-style:lower-alpha}
+  .sub-list li{font-size:9.5pt;line-height:1.5;color:var(--ink-1);margin-bottom:.8mm;text-align:justify}
+
+  /* ===== ANEXO I / II ===== */
+  .annex-eyebrow{font-size:8.5pt;font-weight:700;letter-spacing:.2em;color:var(--teal);text-transform:uppercase}
+  .annex-title{font-weight:800;font-size:18pt;line-height:1.12;color:var(--teal-deeper);margin:2mm 0 4mm}
+  .cc-card{margin-top:2mm;border:1px solid var(--hairline);border-radius:3.5mm;padding:6mm 7mm;background:var(--offwhite)}
+  .cc-card .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.6mm 6mm}
+  .cc-card .s2{grid-column:span 2}
+  .cc-card .field-label{font-size:7.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin-bottom:1mm}
+  .cc-card .field-value{font-size:10.5pt;font-weight:700;color:var(--ink-1)}
+  .cc-card .field-value.teal{color:var(--teal-deeper)}
+  .cc-card .full{grid-column:1 / -1}
+  .sel-list{margin-top:5mm;display:grid;grid-template-columns:1fr 1fr;gap:2.5mm 5mm}
+  .sel-item{display:flex;align-items:flex-start;gap:3mm;padding:2.5mm 3.5mm;background:#fff;border:1px solid var(--hairline);border-radius:2.5mm;border-left:1.3mm solid var(--gold)}
+  .sel-item .ck{width:5.5mm;height:5.5mm;min-width:5.5mm;border-radius:1.3mm;background:var(--teal);color:#fff;font-size:10pt;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .sel-item .tx{font-size:9.5pt;font-weight:700;color:var(--teal-deeper);line-height:1.3}
+  .pay-card{margin-top:6mm;background:var(--teal-deeper);color:#fff;border-radius:3.5mm;padding:6mm 7mm}
+  .pay-card .kk{font-size:8pt;font-weight:700;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:2.5mm}
+  .pay-card .pay-row{display:flex;justify-content:space-between;align-items:baseline;gap:6mm;padding:2mm 0;border-bottom:1px solid rgba(255,255,255,.15)}
+  .pay-card .pay-row:last-child{border-bottom:0}
+  .pay-card .pay-label{font-size:9.5pt;color:rgba(255,255,255,.8);font-weight:600}
+  .pay-card .pay-value{font-size:13pt;color:var(--gold);font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  /* ===== ANEXO II · TABELA DE PRECOS ===== */
+  .price-section{font-size:10pt;font-weight:800;letter-spacing:.06em;color:var(--teal-deeper);text-transform:uppercase;margin:6mm 0 2mm}
+  .price-section:first-of-type{margin-top:0}
+  .price-table{width:100%;border-collapse:collapse;margin-bottom:2mm}
+  .price-table th{background:var(--teal-deeper);color:#fff;font-size:8pt;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:2mm 4mm}
+  .price-table th.val{text-align:right}
+  .price-table td{font-size:9pt;color:var(--ink-1);padding:1.6mm 4mm;border-bottom:1px solid var(--hairline)}
+  .price-table td.val{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--teal-deeper);white-space:nowrap}
+  .price-table tr:nth-child(even) td{background:var(--offwhite)}
+  .price-note{font-size:8.5pt;color:var(--ink-2);line-height:1.5;margin-top:3mm;font-style:italic}
+
+  /* ===== ANEXOS · GRAFIA REDUZIDA (diminuir para caber melhor a pagina) ===== */
+  /* Aplica-se SOMENTE dentro dos anexos (.annex-compact). Capa, resumo,
+     clausulas e assinatura permanecem inalterados. */
+  .annex-compact .annex-eyebrow{font-size:7.5pt}
+  .annex-compact .contract-body{padding:4mm 6mm 6mm}   /* pagina 1 (Condicoes Comerciais) + Anexo II: evita margem dobrada com o @page */
+  .annex-compact .annex-title{font-size:15pt;margin:1.5mm 0 3mm}
+  .annex-compact .price-section{font-size:8.5pt;margin:4mm 0 1.5mm}
+  /* tabela de precos: linhas ~8pt com padding mais justo */
+  .annex-compact .price-table{margin-bottom:1.5mm}
+  .annex-compact .price-table th{font-size:7pt;padding:1.4mm 3mm}
+  .annex-compact .price-table td{font-size:8pt;padding:0.9mm 3mm}
+  .annex-compact .price-table tr{break-inside:avoid}
+  .annex-compact .price-note{font-size:7.5pt;margin-top:2mm}
+  /* cartao Condicoes Comerciais: texto ~9pt */
+  .annex-compact .cc-card{padding:4.5mm 5.5mm;break-inside:avoid}
+  .annex-compact .cc-card .grid{gap:2.5mm 6mm}
+  .annex-compact .cc-card .field-label{font-size:6.5pt}
+  .annex-compact .cc-card .field-value{font-size:9pt}
+  .annex-compact .sel-list{margin-top:4mm;gap:2mm 4mm}
+  .annex-compact .sel-item{padding:2mm 3mm;break-inside:avoid}
+  .annex-compact .sel-item .ck{width:4.8mm;height:4.8mm;min-width:4.8mm;font-size:8.5pt}
+  .annex-compact .sel-item .tx{font-size:8.5pt}
+  .annex-compact .obs-card{padding:4mm 5mm}
+  .annex-compact .obs-card .kk{font-size:7pt}
+  .annex-compact .obs-card p{font-size:8.5pt}
+  .annex-compact .pay-card{padding:4.5mm 5.5mm;margin-top:5mm;break-inside:avoid}
+  .annex-compact .pay-card .kk{font-size:7pt}
+  .annex-compact .pay-card .pay-label{font-size:8.5pt}
+  .annex-compact .pay-card .pay-value{font-size:11pt}
+  .annex-compact .clause-body{font-size:8.5pt}
+
+  /* ===== Override final: A4 RETRATO + sem sobreposição (transform-layout.py) ===== */
+  @media screen{
+    html,body{background:#e8e8e8 !important}
+    .page{width:210mm !important;min-height:297mm;height:auto !important;overflow:visible !important;
+          margin:8mm auto !important;box-shadow:0 2px 14px rgba(0,0,0,.18) !important}
+  }
+  @media print{
+    @page{size:A4 portrait;margin:14mm 14mm}
+    html,body{background:#fff !important}
+    .page{width:auto !important;min-height:0 !important;height:auto !important;overflow:visible !important;
+          margin:0 !important;box-shadow:none !important}
+    /* Fluxo contínuo: NÃO quebrar antes de cada seção; só .flow.break inicia página. */
+    .page,.page.flow{break-before:auto !important;page-break-before:auto !important;break-after:auto !important;page-break-after:auto !important}
+    .flow.break{break-before:page !important;page-break-before:always !important}
+    .page:first-of-type{break-before:auto !important;page-break-before:auto !important}
+    .page.flow:not(.break) .gold-band{display:none !important}
+    .clause-title,
+    .cc-card,.pay-card,.obs-card,.sel-item,.price-table tr,.price-section{break-inside:avoid !important;page-break-inside:avoid !important}
+    .clause-title,.annex-title,.price-section,h1,h2,h3{break-after:avoid !important;page-break-after:avoid !important}
+  }
+  .footer-bar{display:none !important}        /* rodapé absoluto que sobrepunha o texto */
+  .annex-compact, .annex-compact td, .annex-compact th, .annex-compact li, .annex-compact p,
+  .annex-compact .field-value, .annex-compact .field-label{font-size:8pt !important;line-height:1.25 !important}
+  .annex-compact h1, .annex-compact .title, .annex-compact .sec-title{font-size:13pt !important}
+
+
+  /* ======================= v2 · PROPOSTA + ASSINATURA ANCORADA ======================= */
+  /* Bloco Proposta (remontada da base Vendas) */
+  .prop-kicker{font-size:8.5pt;font-weight:700;letter-spacing:.2em;color:var(--teal);text-transform:uppercase}
+  .prop-h1{font-size:22pt;font-weight:800;color:var(--teal-deeper);margin:2mm 0 4mm;line-height:1.15}
+  .prop-lead{font-size:10pt;color:var(--ink-2);line-height:1.6;margin-bottom:6mm;max-width:150mm}
+  .scope-row{display:flex;gap:4mm;align-items:flex-start;border-bottom:.2mm solid var(--hairline);padding:3.2mm 0}
+  .scope-row .ck{width:5mm;height:5mm;border-radius:1.2mm;background:var(--teal);color:#fff;font-size:8pt;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .scope-row .t{font-size:10pt;font-weight:700;color:var(--ink-1)}
+  .scope-row .d{font-size:8.5pt;color:var(--ink-2);margin-top:.6mm}
+  .inv-grid{display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:2mm}
+  .inv-card{border:.3mm solid var(--hairline);border-radius:4mm;padding:6mm;background:#fff}
+  .inv-card.main{background:var(--teal-tint);border-color:var(--teal)}
+  .inv-card .kk{font-size:8pt;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
+  .inv-card .big{font-size:20pt;font-weight:800;color:var(--teal-deeper);margin:2mm 0 1mm}
+  .inv-card .sub{font-size:8.5pt;color:var(--ink-2)}
+  .inv-card ul{margin:4mm 0 0 4mm;padding:0}
+  .inv-card li{font-size:9pt;color:var(--ink-2);line-height:1.55}
+  .cond-card{border-left:1mm solid var(--gold);background:var(--gold-soft,#FFF4CC);border-radius:3mm;padding:5mm 6mm;margin-top:5mm}
+  .cond-card li{font-size:9.5pt;color:var(--ink-1);line-height:1.6;margin-left:4mm}
+
+  /* PAGINA DE ASSINATURA — RIGIDA, margem ZERO.
+     1mm aqui = 1mm no PDF fisico => as coordenadas x/y (%) batem com o Autentique.
+     Linhas: row1 = 170mm (57,2%) · row2 = 226mm (76,1%)
+     Autentique: CONTRATANTE x=16 y=48 | CONTRATADA x=58 y=48 | TEST.1 x=16 y=67 | TEST.2 x=58 y=67 */
+  @page sigpage{size:A4 portrait;margin:0}
+  .page.sigpage{
+    page:sigpage;
+    position:relative !important;
+    width:210mm !important; height:297mm !important; min-height:297mm !important;
+    overflow:hidden !important; background:#fff;
+    break-before:page !important; page-break-before:always !important;
+    margin:0 auto !important; padding:0 !important;
+  }
+  @media print{ .page.sigpage{margin:0 !important;box-shadow:none !important} }
+  .sigpage .sig-head{padding:22mm 20mm 0}
+  .sigpage .accept-card{margin-top:5mm}
+  .sigpage .footer-bar{display:flex !important}
+  .sig-anchor{position:absolute !important; inset:0; z-index:4}
+  .sig-anchor .slot{position:absolute; width:80mm; text-align:center}
+  .sig-anchor .slot .line{border-top:.5mm solid var(--ink-1)}
+  .sig-anchor .slot .name{font-size:9.5pt;font-weight:700;color:var(--ink-1);margin-top:1.5mm;line-height:1.25}
+  .sig-anchor .slot .label{font-size:7.5pt;color:var(--ink-2);margin-top:.6mm}
+  .sig-anchor .slot.L{left:20mm} .sig-anchor .slot.R{left:110mm}
+  .sig-anchor .row1{top:170mm} .sig-anchor .row2{top:226mm}
+
+</style>
+
+<body>
+
+<!-- ============ PAGINA 1 · ANEXO I — CONDICOES COMERCIAIS ============ -->
+
+<!-- ===================== CAPA DO DOCUMENTO (v2) ===================== -->
+<section class="page flow break annex-compact">
+  <div class="gold-band"></div>
+  <div class="contract-body">
+    <div style="text-align:center;padding-bottom:5mm;margin-bottom:10mm;border-bottom:0.4mm solid var(--hairline);">
+      <img src="https://raw.githubusercontent.com/nikolas-realiza/realiza-templates/main/realiza-imagem-2.png" alt="Grupo Realiza" style="height:16mm;width:auto;display:inline-block;">
+    </div>
+    <div style="text-align:center;">
+      <div class="annex-eyebrow">{{doc_kicker}}</div>
+      <h1 style="font-size:26pt !important;line-height:1.12;font-weight:800;color:var(--teal-deeper);margin:3mm 0 6mm;">{{doc_titulo}}</h1>
+      <div style="font-size:12pt;font-weight:700;color:var(--teal);margin-bottom:2mm;">{{razao_social}}</div>
+      <div style="font-size:9.5pt;color:var(--ink-2);">CNPJ {{cnpj}} &middot; {{num_funcionarios}} colaboradores</div>
+    </div>
+
+    <div class="cc-card" style="margin-top:12mm;">
+      <div class="grid">
+        <div><div class="field-label">Refer&ecirc;ncia</div><div class="field-value">{{id_venda}}</div></div>
+        <div><div class="field-label">Modelo</div><div class="field-value teal">{{modelo}}</div></div>
+        <div><div class="field-label">Data</div><div class="field-value">{{data_aceite}}</div></div>
+      </div>
+    </div>
+
+    <div class="annex-eyebrow" style="margin-top:10mm;">Conte&uacute;do deste documento</div>
+    <div class="sel-list">
+      <div class="sel-item"><div class="ck">1</div><div class="tx">Proposta Comercial &mdash; escopo t&eacute;cnico e investimento</div></div>
+      <div class="sel-item"><div class="ck">2</div><div class="tx">Anexo I &mdash; Condi&ccedil;&otilde;es Comerciais</div></div>
+      <div class="sel-item"><div class="ck">3</div><div class="tx">{{doc_titulo_curto}} &mdash; cl&aacute;usulas</div></div>
+      {{#if tem_tabela_negociada}}<div class="sel-item"><div class="ck">4</div><div class="tx">Anexo II &mdash; Tabela de Pre&ccedil;os de Exames e Servi&ccedil;os</div></div>{{/if}}
+      <div class="sel-item"><div class="ck">5</div><div class="tx">Aceite e Assinaturas (&uacute;ltima p&aacute;gina)</div></div>
+    </div>
+    <div class="price-note" style="margin-top:8mm;">Documento &uacute;nico: a assinatura eletr&ocirc;nica na &uacute;ltima p&aacute;gina formaliza, em um s&oacute; ato, o aceite da proposta e a celebra&ccedil;&atilde;o do contrato.</div>
+  </div>
+</section>
+
+<!-- ============ BLOCO 1 - PROPOSTA (remontada da base Vendas) ============ -->
+<section class="page flow break annex-compact">
+  <div class="gold-band"></div>
+  <div class="contract-body">
+    <div class="prop-kicker">Proposta &middot; Escopo t&eacute;cnico</div>
+    <h1 class="prop-h1">Programas, laudos e servi&ccedil;os inclu&iacute;dos</h1>
+    <div class="prop-lead">Escopo conforme registrado na venda ({{id_venda}}) para {{numero_vidas}} colaboradores em {{numero_unidades}} unidade(s). Cada item selecionado ativa as cl&aacute;usulas correspondentes no corpo do contrato.</div>
+
+    {{#if tem_pgr}}<div class="scope-row"><div class="ck">&#10003;</div><div><div class="t">PGR &mdash; Programa de Gerenciamento de Riscos</div><div class="d">NR-01 &mdash; invent&aacute;rio de riscos e plano de a&ccedil;&atilde;o</div></div></div>{{/if}}
+    {{#if tem_pcmso}}<div class="scope-row"><div class="ck">&#10003;</div><div><div class="t">PCMSO</div><div class="d">Programa de Controle M&eacute;dico &mdash; NR-07, com responsabilidade t&eacute;cnica m&eacute;dica</div></div></div>{{/if}}
+    {{#if tem_ltcat}}<div class="scope-row"><div class="ck">&#10003;</div><div><div class="t">LTCAT</div><div class="d">Laudo T&eacute;cnico das Condi&ccedil;&otilde;es Ambientais de Trabalho &mdash; com ART</div></div></div>{{/if}}
+    {{#if tem_insalubridade}}<div class="scope-row"><div class="ck">&#10003;</div><div><div class="t">Laudo de Insalubridade</div><div class="d">NR-15 &mdash; caracteriza&ccedil;&atilde;o de exposi&ccedil;&atilde;o a agentes insalubres</div></div></div>{{/if}}
+    {{#if tem_periculosidade}}<div class="scope-row"><div class="ck">&#10003;</div><div><div class="t">Laudo de Periculosidade</div><div class="d">NR-16 &mdash; caracteriza&ccedil;&atilde;o de atividades perigosas</div></div></div>{{/if}}
+    {{#if tem_psicossocial}}<div class="scope-row"><div class="ck">&#10003;</div><div><div class="t">Fatores de Risco Psicossocial</div><div class="d">Identifica&ccedil;&atilde;o e avalia&ccedil;&atilde;o conforme NR-01</div></div></div>{{/if}}
+    {{#if tem_mensageria}}<div class="scope-row"><div class="ck">&#10003;</div><div><div class="t">Mensageria eSocial</div><div class="d">Envio dos eventos S-2220 e S-2240</div></div></div>{{/if}}
+    {{#if tem_manutencao}}<div class="scope-row"><div class="ck">&#10003;</div><div><div class="t">Manuten&ccedil;&atilde;o mensal</div><div class="d">Atualiza&ccedil;&atilde;o cont&iacute;nua de programas, ASOs e coordena&ccedil;&atilde;o t&eacute;cnica</div></div></div>{{/if}}
+    {{#if tem_avaliacoes}}<div class="scope-row"><div class="ck">&#10003;</div><div><div class="t">Avalia&ccedil;&otilde;es Ambientais</div><div class="d">{{avaliacoes_lista}}</div></div></div>{{/if}}
+    {{#if outros_servicos_lista}}<div class="scope-row"><div class="ck">&#10003;</div><div><div class="t">Outros servi&ccedil;os contratados</div><div class="d">{{outros_servicos_lista}}</div></div></div>{{/if}}
+    {{#if tem_aso_incluido}}<div class="scope-row"><div class="ck">&#10003;</div><div><div class="t">ASO &mdash; Atestado de Sa&uacute;de Ocupacional</div><div class="d">{{aso_label}} &mdash; exames cl&iacute;nicos inclusos na mensalidade</div></div></div>{{/if}}
+
+    <div class="obs-card" style="margin-top:7mm;">
+      <div class="field-label">Resumo de itens</div>
+      <div style="font-size:9.5pt;color:var(--ink-1);margin-top:1.5mm;">{{resumo_itens}}</div>
+    </div>
+  </div>
+</section>
+
+<section class="page flow break annex-compact">
+  <div class="gold-band"></div>
+  <div class="contract-body">
+    <div class="prop-kicker">Proposta &middot; Investimento</div>
+    <h1 class="prop-h1">Detalhamento do investimento</h1>
+    <div class="prop-lead">Valores conforme registrado na base de Vendas &mdash; modelo <b>{{modelo}}</b>.</div>
+
+    {{#if is_plano}}
+    <div class="inv-grid">
+      <div class="inv-card main">
+        <div class="kk">Plano mensal</div>
+        <div class="big">{{mensalidade}}</div>
+        <div class="sub">Mensalidade do contrato &middot; {{numero_vidas}} vidas</div>
+        <ul>
+          <li>Gest&atilde;o completa de SST com equipe t&eacute;cnica dedicada</li>
+          <li>Envio dos eventos S-2220 e S-2240 ao eSocial</li>
+          <li>Atualiza&ccedil;&atilde;o cont&iacute;nua de programas e laudos</li>
+          <li>Vida adicional excedente: {{por_vida_extra}} / m&ecirc;s</li>
+        </ul>
+      </div>
+      <div class="inv-card">
+        <div class="kk">Total estimado anual</div>
+        <div class="big">{{valor_total_plano}}</div>
+        <div class="sub">12 meses de vig&ecirc;ncia</div>
+        <ul>
+          {{#if forma_pagamento}}<li>Forma de pagamento: {{forma_pagamento}}</li>{{/if}}
+          {{#if data_primeira_cobranca}}<li>1&ordf; cobran&ccedil;a: {{data_primeira_cobranca}}</li>{{/if}}
+          <li>Reajuste anual pelo IPCA acumulado</li>
+          <li>5% de desconto na renova&ccedil;&atilde;o de 24 meses</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cond-card">
+      <div class="field-label">Condi&ccedil;&otilde;es comerciais</div>
+      <ul>
+        <li>Mensalidade: <b>{{mensalidade_ext}}</b></li>
+        <li>Valor por vida excedente: <b>{{por_vida_extra_ext}}</b></li>
+        <li>Total do plano (12 meses): <b>{{valor_total_plano_ext}}</b></li>
+        {{#if tem_tabela_negociada}}<li>Exames complementares faturados no m&ecirc;s subsequente, conforme <b>Anexo II &mdash; Tabela de Pre&ccedil;os{{#if tabela_precos_nome}} ({{tabela_precos_nome}}){{/if}}</b>.</li>{{/if}}
+        <li>Contrato renov&aacute;vel automaticamente, salvo manifesta&ccedil;&atilde;o em contr&aacute;rio.</li>
+      </ul>
+    </div>
+    {{else}}
+    <div class="inv-grid">
+      <div class="inv-card main">
+        <div class="kk">Contrata&ccedil;&atilde;o &uacute;nica</div>
+        <div class="big">{{valor_total}}</div>
+        <div class="sub">Programas, laudos e servi&ccedil;os contratados</div>
+        <ul>
+          <li>Escopo integral conforme p&aacute;gina anterior</li>
+          <li>Parcelamento em at&eacute; 5 vezes sem juros</li>
+          <li>Equipe t&eacute;cnica dedicada &agrave; execu&ccedil;&atilde;o</li>
+        </ul>
+      </div>
+      <div class="inv-card">
+        <div class="kk">Condi&ccedil;&otilde;es de pagamento</div>
+        <div class="big">{{parcelas}}x {{valor_parcela}}</div>
+        <div class="sub">Parcelas mensais</div>
+        <ul>
+          {{#if forma_pagamento}}<li>Forma de pagamento: {{forma_pagamento}}</li>{{/if}}
+          {{#if data_primeira_cobranca}}<li>1&ordf; cobran&ccedil;a: {{data_primeira_cobranca}}</li>{{/if}}
+          {{#if tem_tabela_negociada}}<li>Exames conforme <b>Anexo II &mdash; Tabela de Pre&ccedil;os</b></li>{{/if}}
+        </ul>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if tem_tabela_negociada}}<div class="price-note" style="margin-top:6mm;">A tabela de exames e servi&ccedil;os aplic&aacute;vel a este contrato consta no Anexo II, ao final deste documento.</div>{{/if}}
+  </div>
+</section>
+<section class="page flow break annex-compact">
+  <div class="gold-band"></div>
+  <img src="https://raw.githubusercontent.com/nikolas-realiza/realiza-templates/main/realiza-imagem-1.png" class="watermark" alt="">
+  <img src="https://raw.githubusercontent.com/nikolas-realiza/realiza-templates/main/realiza-imagem-2.png" class="brand-mark" alt="">
+  <div class="contract-body">
+    <!-- Cabecalho da empresa + titulo do documento (pagina 1) -->
+    <div style="text-align:center;padding-bottom:5mm;margin-bottom:6mm;border-bottom:0.4mm solid var(--hairline);"><img src="https://raw.githubusercontent.com/nikolas-realiza/realiza-templates/main/realiza-imagem-2.png" alt="Grupo Realiza" style="height:15mm;width:auto;display:inline-block;"></div>
+    <h1 style="font-size:25pt !important;line-height:1.1;font-weight:800;color:var(--teal-deeper);text-align:center;margin:0 0 8mm;letter-spacing:.005em;">Termo Aditivo ao Contrato de Prestação de Serviços</h1>
+    <div class="annex-eyebrow">Anexo I</div>
+    <h1 class="annex-title">Condições Comerciais</h1>
+
+    <div class="cc-card">
+      <div class="grid">
+        <div class="s2">
+          <div class="field-label">Contratante</div>
+          <div class="field-value teal">{{razao_social}}</div>
+        </div>
+        <div>
+          <div class="field-label">CNPJ</div>
+          <div class="field-value">{{cnpj}}</div>
+        </div>
+        <div class="s2">
+          <div class="field-label">Endereço</div>
+          <div class="field-value">{{endereco}}</div>
+        </div>
+        <div>
+          <div class="field-label">N° de empregados</div>
+          <div class="field-value">{{num_funcionarios}}</div>
+        </div>
+        <div>
+          <div class="field-label">Contato operacional</div>
+          <div class="field-value">{{nome_contato}}</div>
+        </div>
+        <div class="s2">
+          <div class="field-label">E-mail</div>
+          <div class="field-value">{{email}}</div>
+        </div>
+        <div>
+          <div class="field-label">Contato financeiro</div>
+          <div class="field-value">{{nome_financeiro}}</div>
+        </div>
+        <div class="s2">
+          <div class="field-label">E-mail financeiro</div>
+          <div class="field-value">{{email_financeiro}}</div>
+        </div>
+        <div>
+          <div class="field-label">Representante legal</div>
+          <div class="field-value">{{rep_legal_nome}}</div>
+        </div>
+        <div>
+          <div class="field-label">Fone</div>
+          <div class="field-value">{{telefone}}</div>
+        </div>
+        <div>
+          <div class="field-label">Data do aceite</div>
+          <div class="field-value">{{data_aceite}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annex-eyebrow" style="margin-top:7mm;">Itens Selecionados</div>
+    <div class="sel-list">
+      <div class="sel-item"><div class="ck">&#10003;</div><div class="tx">Questionário de Fatores Psicossociais</div></div>
+      <div class="sel-item"><div class="ck">&#10003;</div><div class="tx">Radar de Fatores de Riscos Psicossociais</div></div>
+      <div class="sel-item"><div class="ck">&#10003;</div><div class="tx">Atualização do PGR (NR-01)</div></div>
+      <div class="sel-item"><div class="ck">&#10003;</div><div class="tx">Plano de Ação para Riscos Psicossociais</div></div>
+    </div>
+
+    <div class="pay-card">
+      <span class="kk">Forma de Pagamento</span>
+      {{#if aditivo_plano}}
+      <div class="pay-row">
+        <span class="pay-label">Valor mensal</span>
+        <span class="pay-value">{{mensalidade}}</span>
+      </div>
+      <div class="pay-row">
+        <span class="pay-label">Por vida extra</span>
+        <span class="pay-value">{{por_vida_extra}}</span>
+      </div>
+      <div class="pay-row">
+        <span class="pay-label">Total estimado do contrato</span>
+        <span class="pay-value">{{valor_total_plano}}</span>
+      </div>
+      {{else}}
+      <div class="pay-row">
+        <span class="pay-label">Valor Total</span>
+        <span class="pay-value">{{valor_aditivo}}</span>
+      </div>
+      <div class="pay-row">
+        <span class="pay-label">Parcelado em</span>
+        <span class="pay-value">{{parcelas_aditivo}}</span>
+      </div>
+      <div class="pay-row">
+        <span class="pay-label">Valor da parcela</span>
+        <span class="pay-value">{{valor_parcela_aditivo}}</span>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span class="brand-mini">Grupo Realiza · Anexo I — Condições Comerciais</span>
+    <span></span>
+  </div>
+</section>
+
+<!-- ============ CLAUSULAS DO TERMO ADITIVO ============ -->
+<section class="page flow break">
+  <div class="gold-band"></div>
+  <img src="https://raw.githubusercontent.com/nikolas-realiza/realiza-templates/main/realiza-imagem-1.png" class="watermark" alt="">
+  <img src="https://raw.githubusercontent.com/nikolas-realiza/realiza-templates/main/realiza-imagem-2.png" class="brand-mark" alt="">
+  <div class="contract-body">
+    <div class="doc-eyebrow">Instrumento Particular — Termo Aditivo</div>
+    <h1 class="contract-title">Termo Aditivo ao Contrato de Prestação de Serviços</h1>
+
+    <div class="clause-section">Das Partes</div>
+    <p class="clause-body">Pelo presente instrumento particular, e na melhor forma de direito, as partes abaixo identificadas, já qualificadas no Contrato de Prestação de Serviços principal celebrado entre si, acordam a celebração do presente Termo Aditivo, que se regerá pelas cláusulas e condições a seguir:</p>
+    <p class="clause-body"><b>{{razao_social}}</b>, inscrita no CNPJ sob o nº {{cnpj}}, com endereço em {{endereco}}, neste ato representada por {{rep_legal_nome}} (CPF {{rep_legal_cpf}}), qualificada nas CONDIÇÕES COMERCIAIS, ANEXO I e parte integrante deste instrumento, doravante denominada CONTRATANTE;</p>
+    <p class="clause-body">REALIZA SOLUCOES EM MEDICINA E SEGURANCA DO TRABALHO S/S LTDA, pessoa jurídica de direito privado, inscrita no CNPJ/MF sob o n.º 08.493.351/0001-93, com sede na Av. Alberto Bins, 658/402, Bairro Centro, cidade de Porto Alegre/RS, CEP 90030-140, doravante denominada CONTRATADA.</p>
+
+    <div class="clause-section">CLÁUSULA 1ª – DO OBJETO DO ADITIVO</div>
+    <p class="clause-body">O presente Termo Aditivo tem por objeto a inclusão, no Contrato de Prestação de Serviços vigente entre as partes, de serviços especializados em Saúde e Segurança do Trabalho consistentes na <b>avaliação de Fatores de Riscos Psicossociais</b> no ambiente de trabalho da CONTRATANTE, em conformidade com a Norma Regulamentadora n.º 1 (NR-1) do Ministério do Trabalho e Emprego e demais legislações vigentes, incluindo a Lei n.º 13.709/2018 (LGPD).</p>
+
+    <div class="clause-section">CLÁUSULA 2ª – DOS SERVIÇOS ADITIVADOS</div>
+    <p class="clause-body">Para fins do disposto na Cláusula 1ª, a CONTRATADA obriga-se a prestar os seguintes serviços:</p>
+    <p class="clause-body"><b>I – Aplicação de Questionário de Fatores Psicossociais:</b> elaboração e aplicação de instrumento de coleta de dados junto aos colaboradores da CONTRATANTE, com vistas ao mapeamento da percepção dos trabalhadores sobre o ambiente organizacional, a gestão e os riscos ocupacionais de natureza psicossocial, garantindo o anonimato dos respondentes e o tratamento sigiloso das informações, nos termos da LGPD;</p>
+    <p class="clause-body"><b>II – Análise dos Resultados e Emissão do Radar de Fatores de Riscos Psicossociais:</b> processamento e análise dos dados coletados, com a elaboração de relatório técnico diagnóstico identificando os principais riscos presentes no ambiente de trabalho da CONTRATANTE, por setor ou grupo homogêneo de exposição, conforme aplicável;</p>
+    <p class="clause-body"><b>III – Atualização do Programa de Gerenciamento de Riscos (PGR):</b> revisão e atualização do PGR da CONTRATANTE para incorporar os riscos psicossociais identificados, de acordo com os requisitos da NR-1 e demais normas regulamentadoras pertinentes;</p>
+    <p class="clause-body"><b>IV – Elaboração do Plano de Ação para Riscos Psicossociais:</b> com base no diagnóstico obtido, elaboração de Plano de Ação contendo medidas de prevenção, controle e mitigação dos riscos identificados, com indicação de responsáveis, prazos e indicadores de acompanhamento.</p>
+    <p class="clause-body"><b>Parágrafo Único.</b> Os serviços serão prestados na modalidade <b>híbrida</b>, compreendendo atividades realizadas <b>presencialmente</b> nas dependências da CONTRATANTE e atividades executadas remotamente pela CONTRATADA, conforme cronograma acordado entre as partes.</p>
+
+    <div class="clause-section">CLÁUSULA 3ª – DO PRAZO DE EXECUÇÃO E CRONOGRAMA</div>
+    <p class="clause-body">A execução dos serviços aditivados observará o cronograma de etapas descrito nesta Cláusula, cujos prazos são contados em dias corridos a partir dos respectivos marcos de início, salvo disposição em contrário acordada por escrito entre as partes.</p>
+    <p class="clause-body"><b>Parágrafo 1º.</b> A prestação dos serviços será organizada nas seguintes etapas:</p>
+    <p class="clause-body"><b>I – ETAPA 1 – Identificação dos Riscos Psicossociais:</b> compreende a aplicação do questionário de fatores psicossociais, o processamento dos dados e a elaboração do Radar de Fatores de Riscos Psicossociais. <b>Prazo:</b> 21 (vinte e um) dias corridos contados da data de conclusão da coleta do questionário, assim entendida a data limite de resposta fixada de comum acordo entre as partes;</p>
+    <p class="clause-body"><b>II – ETAPA 2 – Avaliação dos Riscos Psicossociais:</b> compreende a apresentação dos resultados à gerência da CONTRATANTE e a elaboração da proposta de atualização do PGR. <b>Prazo:</b> 21 (vinte e um) dias corridos contados da realização da Reunião com a Gerência da CONTRATANTE;</p>
+    <p class="clause-body"><b>III – ETAPA 3 – Conclusão e Entrega:</b> compreende a elaboração e entrega do Plano de Ação para Riscos Psicossociais e da versão atualizada do PGR. <b>Prazo:</b> 21 (vinte e um) dias corridos contados da realização da Apresentação dos resultados à CONTRATANTE.</p>
+    <p class="clause-body"><b>Parágrafo 2º.</b> Os marcos de início de cada etapa — conclusão do questionário, Reunião com Gerência e Apresentação — serão agendados de comum acordo entre as partes, com antecedência mínima de 5 (cinco) dias úteis, mediante comunicação formal por e-mail.</p>
+    <p class="clause-body"><b>Parágrafo 3º.</b> Os prazos ficam automaticamente suspensos nos casos em que seu cumprimento dependa de informações, documentos, autorizações ou providências a cargo exclusivo da CONTRATANTE e que não tenham sido fornecidos tempestivamente, retomando a contagem a partir do dia útil seguinte ao suprimento da pendência.</p>
+    <p class="clause-body"><b>Parágrafo 4º.</b> Qualquer alteração nos prazos ou no cronograma deverá ser formalizada por escrito entre as partes.</p>
+
+    <div class="clause-section">CLÁUSULA 4ª – DO VALOR E FORMA DE PAGAMENTO</div>
+    {{#if aditivo_plano}}
+    <p class="clause-body">Pela execução dos serviços descritos neste Termo Aditivo, a CONTRATANTE pagará à CONTRATADA a mensalidade de <b>{{mensalidade_ext}}</b>, acrescida de <b>{{por_vida_extra_ext}}</b> por vida adicional, totalizando o valor estimado de <b>{{valor_total_plano_ext}}</b>, vencendo-se a primeira mensalidade dentro do prazo de 7 dias após assinatura deste contrato considerando-se o limite mínimo de {{num_funcionarios}} funcionários da CONTRATANTE.</p>
+    {{else}}
+    <p class="clause-body">Pela execução dos serviços descritos neste Termo Aditivo, a CONTRATANTE pagará à CONTRATADA o valor total de <b>{{valor_aditivo}}</b>, dividido em <b>{{parcelas_aditivo}}</b> parcelas mensais e consecutivas de <b>{{valor_parcela_aditivo}}</b>, vencendo-se a primeira parcela dentro do prazo de 7 dias após assinatura deste contrato considerando-se o limite mínimo de {{num_funcionarios}} funcionários da CONTRATANTE.</p>
+    {{/if}}
+
+    <div class="clause-section">CLÁUSULA 5ª – DO AJUSTE PROPORCIONAL</div>
+    <p class="clause-body">Para cada empregado adicional cadastrado, o valor da parcela será ajustado proporcionalmente. Em caso de redução do quadro, o valor será ajustado proporcionalmente, observado o valor mínimo mensal pactuado.</p>
+    <p class="clause-body"><b>Parágrafo Único.</b> O inadimplemento dos valores devidos em razão do presente Aditivo sujeita-se às mesmas consequências previstas na Cláusula 27 do Contrato Principal.</p>
+
+    <div class="clause-section">CLÁUSULA 6ª – DAS RESPONSABILIDADES DAS PARTES</div>
+    <p class="clause-body">São obrigações da CONTRATANTE:</p>
+    <p class="clause-body"><b>I –</b> disponibilizar acesso aos seus colaboradores para fins de aplicação do questionário, nos prazos e condições acordados;</p>
+    <p class="clause-body"><b>II –</b> garantir o comparecimento de representantes com poderes decisórios nas reuniões de apresentação e alinhamento previstas no cronograma;</p>
+    <p class="clause-body"><b>III –</b> fornecer as informações organizacionais necessárias para a execução dos serviços, incluindo organograma, descrição de cargos, setores e dados pertinentes ao ambiente de trabalho;</p>
+    <p class="clause-body"><b>IV –</b> obter de cada colaborador participante a autorização para coleta e tratamento de seus dados, nos termos da LGPD e conforme o disposto na Cláusula 29 do Contrato Principal.</p>
+    <p class="clause-body"><b>Parágrafo Único.</b> Não caberá à CONTRATADA qualquer responsabilidade decorrente da omissão ou do fornecimento de informações incorretas ou incompletas pela CONTRATANTE, tampouco pelo descumprimento dos prazos de execução em razão de ausência de colaboradores ou de não realização das reuniões previstas no cronograma.</p>
+
+    <div class="clause-section">CLÁUSULA 7ª – DA PROTEÇÃO DE DADOS</div>
+    <p class="clause-body">Os dados pessoais e informações dos colaboradores coletados em razão da execução dos serviços aditivados serão tratados em estrita conformidade com a Lei n.º 13.709/2018 (LGPD), sendo utilizados exclusivamente para as finalidades previstas neste Aditivo. A CONTRATADA compromete-se a manter sigilo absoluto quanto à identidade dos respondentes do questionário, garantindo o anonimato das respostas individuais, cujos resultados serão apresentados de forma consolidada.</p>
+
+    <div class="clause-section">CLÁUSULA 8ª – DAS DISPOSIÇÕES GERAIS</div>
+    <p class="clause-body">O presente Termo Aditivo integra-se ao Contrato de Prestação de Serviços principal, sendo parte indissociável dele. As demais cláusulas e condições do Contrato Principal que não conflitem com o presente instrumento permanecem em plena vigência e eficácia.</p>
+    <p class="clause-body"><b>Parágrafo 1º.</b> Eventuais controvérsias decorrentes do presente Aditivo serão dirimidas nos termos e no foro previstos na Cláusula 38 do Contrato Principal.</p>
+    <p class="clause-body"><b>Parágrafo 2º.</b> O presente instrumento constitui título executivo extrajudicial, nos termos do art. 784 do Código de Processo Civil.</p>
+    <p class="clause-body"><b>Parágrafo 3º.</b> A assinatura do presente Termo Aditivo é realizada em plataforma digital, com data de vigência vinculada à data de aceite por parte da CONTRATANTE, tendo o mesmo valor jurídico de instrumento físico assinado pelas partes.</p>
+  </div>
+</section>
+
+<!-- ============ ACEITE E ASSINATURAS ============ -->
+
+<!-- ============ ULTIMA PAGINA - ACEITE E ASSINATURAS (rigida) ============
+     NAO alterar os offsets (row1=170mm / row2=226mm / L=20mm / R=110mm):
+     eles definem as coordenadas enviadas ao Autentique no fluxo F2. -->
+<section class="page sigpage">
+  <div class="gold-band"></div>
+  <img src="https://raw.githubusercontent.com/nikolas-realiza/realiza-templates/main/realiza-imagem-1.png" class="watermark" alt="" style="display:block">
+  <img src="https://raw.githubusercontent.com/nikolas-realiza/realiza-templates/main/realiza-imagem-2.png" class="brand-mark" alt="">
+
+  <div class="sig-head">
+    <div class="eyebrow">Aceite e Assinaturas</div>
+    <h1 class="title" style="font-size:20pt;">Concord&acirc;ncia com a proposta e com o contrato</h1>
+    <div class="accept-card">
+      <span class="kk">Declara&ccedil;&atilde;o de Aceite</span>
+      <h3>Formaliza&ccedil;&atilde;o em um &uacute;nico ato</h3>
+      <p>A empresa <b>{{razao_social}}</b>, inscrita no CNPJ sob o n&ordm; <b>{{cnpj}}</b>, neste ato representada por <b>{{rep_legal_nome}}</b> (CPF {{rep_legal_cpf}}), declara estar de acordo com o escopo, o dimensionamento e o investimento apresentados na <b>Proposta Comercial</b> que integra este documento, bem como com todas as cl&aacute;usulas e condi&ccedil;&otilde;es do <b>{{doc_titulo_curto}}</b> e seus Anexos, celebrado com a <b>REALIZA SOLU&Ccedil;&Otilde;ES EM MEDICINA E SEGURAN&Ccedil;A DO TRABALHO S/S LTDA</b>, em <b>{{data_aceite}}</b>, autorizando o in&iacute;cio dos trabalhos.</p>
+      <div style="font-size:8.5pt;color:var(--ink-3);letter-spacing:.06em;">Assinatura eletr&ocirc;nica realizada na plataforma Autentique &middot; Porto Alegre/RS, {{data_extenso}}.</div>
+    </div>
+  </div>
+
+  <div class="sig-anchor">
+    <div class="slot L row1">
+      <div class="line"></div>
+      <div class="name">{{razao_social}}</div>
+      <div class="label">CONTRATANTE &middot; {{rep_legal_nome}} &middot; CPF {{rep_legal_cpf}}</div>
+    </div>
+    <div class="slot R row1">
+      <div class="line"></div>
+      <div class="name">Realiza Solu&ccedil;&otilde;es em Medicina e Seguran&ccedil;a do Trabalho S/S Ltda</div>
+      <div class="label">CONTRATADA</div>
+    </div>
+    <div class="slot L row2">
+      <div class="line"></div>
+      <div class="name">Carmen Caetano</div>
+      <div class="label">TESTEMUNHA 1 &middot; Grupo Realiza</div>
+    </div>
+    <div class="slot R row2">
+      <div class="line"></div>
+      <div class="name">{{nome_financeiro}}</div>
+      <div class="label">TESTEMUNHA 2 &middot; {{razao_social}}</div>
+    </div>
+  </div>
+
+  <div class="footer-bar" style="display:flex">
+    <span class="brand-mini">Grupo Realiza &middot; Proposta &amp; Contrato</span>
+    <span></span>
+  </div>
+</section>
+
+
+</body>
+</html>

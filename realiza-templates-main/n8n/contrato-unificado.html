@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Contrato de Prestação de Serviços · {{razao_social}} · Realiza</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============ Realiza · Contrato Unificado v3 · verde predominante ============ */
+  :root{
+    --teal:#007276; --teal-dark:#005F62; --teal-deeper:#004448;
+    --teal-tint:#E0F2F3; --gold:#FFC000; --gold-soft:#FFF4CC;
+    --offwhite:#FAFAF7; --paper:#F5F5F2; --hairline:#ECECEC;
+    --divider:#E5E5E5; --mute:#BFBFBF;
+    --ink-1:#1A1A1A; --ink-2:#555555; --ink-3:#8A8A8A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    font-family:'Montserrat',Arial,Helvetica,sans-serif;color:var(--ink-1);
+    background:#fff;-webkit-font-smoothing:antialiased;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+
+  /* ---------- Páginas de altura fixa (capa e assinaturas) ---------- */
+  .page{
+    width:210mm;height:297mm;position:relative;overflow:hidden;
+    background:#fff;margin:0 auto;
+    page-break-after:always;break-after:page;clip-path:inset(0);
+  }
+  .page.cover{page:fullbleed}
+  .page.anexo1{page:anexo1;padding:13mm 14mm}
+  @page anexo1{size:A4 portrait;margin:0}
+  .grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:3mm 5mm}
+  .a1-card{padding:4.5mm 5.5mm;border-radius:3mm}
+  .a1-card .field-label{font-size:6.8pt}
+  .a1-card .field-value{font-size:8.8pt}
+  .a1-sub{font-size:7.6pt;font-weight:500;color:var(--ink-2);margin-top:.6mm;overflow-wrap:anywhere}
+  .a1-cols{display:grid;grid-template-columns:1fr 1fr;gap:5mm;align-items:start}
+  .a1-sel{gap:2mm 5mm}
+  .a1-sel .sel-item{font-size:8.4pt}
+  .a1-sel .sel-item .ck{width:4.2mm;height:4.2mm;font-size:7pt}
+  .a1-pay{display:grid;grid-template-columns:1fr;gap:2.2mm}
+  .a1-cond{font-size:8pt;color:var(--ink-2);margin-top:2.6mm;line-height:1.5}
+  .a1-cond b{color:var(--ink-1)}
+  .a1-foot{
+    position:absolute;left:14mm;right:14mm;bottom:9mm;
+    font-size:7pt;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+    border-top:.3mm solid var(--hairline);padding-top:2.5mm;text-align:center;
+  }
+  .page.anexo1 .min-desc{font-size:7.9pt;margin-top:3mm}
+  .page.sigpage{page:sigpage}
+  @page{size:A4 portrait;margin:16mm 15mm 18mm}
+  @page fullbleed{size:A4 portrait;margin:0}
+  @page sigpage{size:A4 portrait;margin:0}
+
+  /* ---------- Blocos de fluxo (conteúdo pagina automaticamente) ---------- */
+  .flow{background:#fff;margin:0 auto}
+  .flow.brk{break-before:page;page-break-before:always}
+  p{orphans:3;widows:3}
+
+  /* ---------- Tipografia ---------- */
+  .eyebrow{font-size:9pt;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+  h1.sec-title{font-size:19pt;font-weight:800;color:var(--teal-deeper);line-height:1.15;margin:2mm 0 5mm}
+  .sec-rule{height:.9mm;width:26mm;background:var(--teal);margin:0 0 6mm;border-radius:2mm}
+
+  /* ---------- Cabeçalho de bloco (logo) ---------- */
+  .block-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-bottom:3.5mm;margin-bottom:7mm;border-bottom:.5mm solid var(--teal);
+    break-after:avoid;page-break-after:avoid;
+  }
+  .block-head img{height:11mm;width:auto;display:block}
+  .logo-teal{display:inline-block;width:45mm;height:11mm;background:url(data:image/png;base64,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) no-repeat left center;background-size:contain}
+  .price-section{font-size:9pt;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-deeper);margin:5mm 0 2mm;break-after:avoid}
+  table.price-table{width:100%;border-collapse:collapse;margin-top:1mm}
+  table.price-table th{background:var(--teal);color:#fff;font-size:8pt;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:2.2mm 3mm}
+  table.price-table th.val{text-align:right}
+  table.price-table td{font-size:8.2pt;color:var(--ink-2);padding:1.7mm 3mm;border-bottom:.25mm solid var(--hairline)}
+  table.price-table td.val{text-align:right;font-weight:700;color:var(--ink-1);white-space:nowrap}
+  table.price-table tr{break-inside:avoid;page-break-inside:avoid}
+  table.price-table tr:nth-child(even) td{background:var(--offwhite)}
+  .block-head .bh-kicker{font-size:8pt;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);text-align:right;line-height:1.5}
+  .block-head .bh-kicker b{color:var(--teal);display:block;font-size:8.5pt}
+
+  /* ---------- Cards ---------- */
+  .card{background:#fff;border:.35mm solid var(--hairline);border-radius:4mm;padding:6mm 7mm;break-inside:avoid;page-break-inside:avoid}
+  .card.tint{background:var(--teal-tint);border-color:var(--teal-tint);border-left:1.4mm solid var(--teal)}
+  .field-label{font-size:7.2pt;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.8mm}
+  .field-value{font-size:9.5pt;font-weight:600;color:var(--ink-1);line-height:1.35;overflow-wrap:anywhere}
+  .field-value.teal{color:var(--teal)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:4mm 6mm}
+  .pay-tag{display:inline-block;background:var(--teal);color:#fff;font-size:7.5pt;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;border-radius:1.6mm;padding:1mm 3mm;margin-bottom:2.2mm}
+  .min-desc{font-size:8.4pt;color:var(--ink-2);line-height:1.55;margin-top:3.2mm;
+    border-top:.3mm solid rgba(0,114,118,.25);padding-top:2.8mm}
+  .min-desc b{color:var(--teal-deeper)}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm 6mm}
+
+  /* ---------- Checklist de itens ---------- */
+  .sel-list{display:grid;grid-template-columns:1fr 1fr;gap:2.2mm 6mm;break-inside:avoid}
+  .sel-item{display:flex;align-items:flex-start;gap:2.6mm;font-size:9pt;font-weight:600;color:var(--ink-1);line-height:1.3}
+  .sel-item .ck{
+    flex:0 0 auto;width:4.6mm;height:4.6mm;border-radius:1.2mm;background:var(--teal);color:#fff;
+    font-size:7.5pt;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:.2mm;
+  }
+
+  /* ---------- Corpo do contrato ---------- */
+  .contract p, .contract li, .contract .cl, .contract .cl-open, .contract .par{font-size:9.3pt;line-height:1.5;color:var(--ink-2)}
+  .contract .intro{margin-bottom:3.2mm}
+  .sec{
+    font-size:10.5pt;font-weight:800;letter-spacing:.05em;color:var(--teal-deeper);text-transform:uppercase;
+    margin:7mm 0 2.6mm;line-height:1.3;break-after:avoid;page-break-after:avoid;
+    padding-left:3.4mm;border-left:1.4mm solid var(--teal);
+  }
+  .cl{margin-bottom:3.2mm;break-inside:avoid;page-break-inside:avoid}
+  .cl-open{margin-bottom:3.2mm} /* cláusula longa: pode quebrar entre parágrafos/itens */
+  .par{margin:1.8mm 0 0}
+  .cl b.cn, .cl-open b.cn{color:var(--teal-deeper);font-weight:800}
+  .cl b, .cl-open b, .par b{color:var(--ink-1)}
+  ol.rlist{margin:1.6mm 0 0 6mm;padding:0}
+  ol.rlist li{margin-bottom:1.2mm;break-inside:avoid;page-break-inside:avoid}
+  ol.rom{list-style:upper-roman}
+  ol.abc{list-style:lower-alpha}
+  .fill{
+    font-weight:800;color:var(--teal);white-space:nowrap;
+    border-bottom:.4mm solid var(--teal);padding:0 1mm;
+  }
+
+  /* ---------- Tabela ANEXO II ---------- */
+  table.precos{width:100%;border-collapse:collapse;margin-top:3mm}
+  table.precos th{
+    background:var(--teal);color:#fff;font-size:8pt;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    text-align:left;padding:2.2mm 3mm;
+  }
+  table.precos th:last-child{text-align:right}
+  table.precos td{font-size:8.2pt;color:var(--ink-2);padding:1.7mm 3mm;border-bottom:.25mm solid var(--hairline)}
+  table.precos td:last-child{text-align:right;font-weight:700;color:var(--ink-1);white-space:nowrap}
+  table.precos tr{break-inside:avoid;page-break-inside:avoid}
+  table.precos tr:nth-child(even) td{background:var(--offwhite)}
+  .tbl-note{font-size:7.8pt;color:var(--ink-3);margin-top:2.5mm;line-height:1.45}
+
+  /* ---------- Capa ---------- */
+  .cover{background:var(--teal)}
+  .cover .cv-inner{position:absolute;inset:0;display:flex;flex-direction:column;padding:24mm 22mm 0}
+  .cover .cv-logo{height:26mm;width:auto;display:block;margin:14mm auto 0}
+  .cover .cv-goldrule{width:34mm;height:1.4mm;background:var(--gold);border-radius:1mm;margin:10mm auto 12mm}
+  .cover .cv-kicker{font-size:10pt;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.85);text-align:center}
+  .cover h1{font-size:27pt;font-weight:800;color:#fff;text-align:center;line-height:1.16;margin:5mm 8mm 0}
+  .cover .cv-emp{font-size:13pt;font-weight:700;color:#fff;text-align:center;margin-top:12mm}
+  .cover .cv-cnpj{font-size:9.5pt;font-weight:500;color:rgba(255,255,255,.85);text-align:center;margin-top:2mm}
+  .cover .cv-meta{
+    position:absolute;left:22mm;right:22mm;bottom:34mm;display:flex;justify-content:space-between;gap:6mm;
+    border-top:.35mm solid rgba(255,255,255,.35);padding-top:5mm;
+  }
+  .cover .cv-meta .m .k{font-size:7pt;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+  .cover .cv-meta .m .v{font-size:9.5pt;font-weight:700;color:#fff;margin-top:1mm}
+  .cover .cv-foot{
+    position:absolute;left:0;right:0;bottom:0;height:16mm;background:var(--teal-deeper);
+    display:flex;align-items:center;justify-content:center;
+    font-size:8pt;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);
+  }
+
+  /* ---------- Página de assinaturas (âncoras fixas · NÃO ALTERAR POSIÇÕES) ----------
+     x/y (%) batem com o Autentique (F2 · Enviar para Assinatura):
+       Linhas: row1 = 170mm (57,2%) · row2 = 226mm (76,1%)
+       Autentique: CONTRATANTE x=16 y=48 | CONTRATADA x=58 y=48 | TEST.1 x=16 y=67 | TEST.2 x=58 y=67 */
+  .page.sigpage{
+    position:relative !important;
+    width:210mm !important;height:297mm !important;min-height:297mm !important;
+    overflow:hidden !important;background:#fff;
+    break-before:page !important;page-break-before:always !important;
+    margin:0 auto !important;padding:0 !important;
+  }
+  .sigpage .sig-band{height:8mm;background:var(--teal);border-bottom:1mm solid var(--gold)}
+  .sigpage .sig-head{padding:14mm 20mm 0}
+  .sigpage .accept-card{
+    margin-top:6mm;background:var(--teal-tint);border-left:1.6mm solid var(--teal);
+    border-radius:3mm;padding:6mm 7mm;
+  }
+  .sigpage .accept-card .kk{font-size:7.5pt;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+  .sigpage .accept-card h3{font-size:12pt;font-weight:800;color:var(--teal-deeper);margin:1.6mm 0 2.4mm}
+  .sigpage .accept-card p{font-size:9pt;line-height:1.55;color:var(--ink-2);margin-bottom:2.6mm}
+  .sig-anchor{position:absolute !important;inset:0;z-index:4}
+  .sig-anchor .slot{position:absolute;width:80mm;text-align:center}
+  .sig-anchor .slot .line{border-top:.5mm solid var(--ink-1)}
+  .sig-anchor .slot .name{font-size:9.5pt;font-weight:700;color:var(--ink-1);margin-top:1.5mm;line-height:1.25}
+  .sig-anchor .slot .label{font-size:7.5pt;color:var(--ink-2);margin-top:.6mm}
+  .sig-anchor .slot.L{left:20mm} .sig-anchor .slot.R{left:110mm}
+  .sig-anchor .row1{top:170mm} .sig-anchor .row2{top:226mm}
+  .sigpage .sig-foot{
+    position:absolute;left:20mm;right:20mm;bottom:10mm;display:flex;justify-content:space-between;
+    font-size:7.5pt;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+    border-top:.3mm solid var(--hairline);padding-top:3mm;
+  }
+
+  /* ---------- Tela (preview) ---------- */
+  @media screen{
+    body{background:#e8e8e8;padding:8mm 0}
+    .page,.flow{box-shadow:0 2px 14px rgba(0,0,0,.18);margin-bottom:8mm}
+    .flow{width:210mm;padding:16mm 15mm 18mm}
+  }
+  @media print{
+    .flow{width:auto;padding:0}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== CAPA (verde predominante) ===================== -->
+<section class="page cover">
+  <div class="cv-inner">
+    <img class="cv-logo" src="data:image/png;base64,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" alt="Realiza">
+    <div class="cv-goldrule"></div>
+    <div class="cv-kicker">Contrato de Prestação de Serviços</div>
+    <h1>{{doc_titulo}}</h1>
+    <div class="cv-emp">{{razao_social}}</div>
+    <div class="cv-cnpj">CNPJ {{cnpj}} &middot; {{num_funcionarios}} colaboradores</div>
+  </div>
+  <div class="cv-meta">
+    <div class="m"><div class="k">Referência</div><div class="v">{{id_venda}}</div></div>
+    <div class="m"><div class="k">Data do aceite</div><div class="v">{{data_aceite}}</div></div>
+    <div class="m"><div class="k">Conteúdo</div><div class="v">Anexo I · Contrato · Anexo II</div></div>
+  </div>
+  <div class="cv-foot">Realiza · Saúde e Segurança do Trabalho</div>
+</section>
+
+<!-- ===================== ANEXO I · CONDIÇÕES COMERCIAIS (SEMPRE 1 PÁGINA) ===================== -->
+<section class="page anexo1">
+  <div class="block-head">
+    <span class="logo-teal"></span>
+    <div class="bh-kicker">Contrato de Prestação de Serviços<b>Anexo I · Condições Comerciais</b></div>
+  </div>
+
+  <div class="eyebrow">Anexo I</div>
+  <h1 class="sec-title" style="font-size:16pt;margin:1.5mm 0 3.5mm">Condições Comerciais</h1>
+  <div class="sec-rule" style="margin-bottom:4.5mm"></div>
+
+  <div class="card tint a1-card" style="margin-bottom:3.5mm">
+    <div class="grid-4">
+      <div style="grid-column:span 2"><div class="field-label">Contratante</div><div class="field-value teal">{{razao_social}}</div></div>
+      <div><div class="field-label">CNPJ</div><div class="field-value">{{cnpj}}</div></div>
+      <div><div class="field-label">N&ordm; de empregados</div><div class="field-value">{{num_funcionarios}}</div></div>
+      <div style="grid-column:span 2"><div class="field-label">Endereço</div><div class="field-value">{{endereco}}</div></div>
+      <div><div class="field-label">Segmento</div><div class="field-value">{{segmento}}</div></div>
+      <div><div class="field-label">Data do aceite</div><div class="field-value teal">{{data_aceite}}</div></div>
+    </div>
+  </div>
+
+  <div class="card a1-card" style="margin-bottom:4mm">
+    <div class="grid-3">
+      <div>
+        <div class="field-label">Contato operacional</div>
+        <div class="field-value">{{nome_contato}}</div>
+        <div class="a1-sub">{{email}}</div>
+        <div class="a1-sub">{{telefone}}</div>
+      </div>
+      <div>
+        <div class="field-label">Contato financeiro</div>
+        <div class="field-value">{{nome_financeiro}}</div>
+        <div class="a1-sub">{{email_financeiro}}</div>
+      </div>
+      <div>
+        <div class="field-label">Representante legal</div>
+        <div class="field-value">{{rep_legal_nome}}</div>
+        <div class="a1-sub">{{email_rep_legal}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eyebrow" style="margin:0 0 2mm">Itens selecionados</div>
+  {{#if is_misto}}
+  <div class="a1-cols" style="margin-bottom:4mm">
+    <div>
+      <div class="pay-tag">Avulso — programas e laudos</div>
+      <div class="sel-list a1-sel" style="grid-template-columns:1fr">
+        {{#if tem_pgr}}<div class="sel-item"><div class="ck">✓</div><div>PGR — Programa de Gerenciamento de Riscos</div></div>{{/if}}
+        {{#if tem_pcmso}}<div class="sel-item"><div class="ck">✓</div><div>PCMSO — Controle Médico e Saúde Ocupacional</div></div>{{/if}}
+        {{#if tem_ltcat}}<div class="sel-item"><div class="ck">✓</div><div>LTCAT — Laudo Técnico de Condições Ambientais</div></div>{{/if}}
+        {{#if tem_insalubridade}}<div class="sel-item"><div class="ck">✓</div><div>Laudo de Insalubridade</div></div>{{/if}}
+        {{#if tem_periculosidade}}<div class="sel-item"><div class="ck">✓</div><div>Laudo de Periculosidade</div></div>{{/if}}
+        {{#if tem_psicossocial}}<div class="sel-item"><div class="ck">✓</div><div>Fatores de Riscos Psicossociais (NR-01)</div></div>{{/if}}
+        {{#if tem_avaliacoes}}<div class="sel-item"><div class="ck">✓</div><div>Avaliações Ambientais: {{avaliacoes_lista}}</div></div>{{/if}}
+        {{#if outros_servicos_lista}}<div class="sel-item"><div class="ck">✓</div><div>{{outros_servicos_lista}}</div></div>{{/if}}
+      </div>
+    </div>
+    <div>
+      <div class="pay-tag">Plano — gestão mensal</div>
+      <div class="sel-list a1-sel" style="grid-template-columns:1fr">
+        {{#if tem_aso_incluido}}<div class="sel-item"><div class="ck">✓</div><div>ASO incluído na mensalidade</div></div>{{/if}}
+        {{#if tem_mensageria}}<div class="sel-item"><div class="ck">✓</div><div>Mensageria eSocial (eventos de SST)</div></div>{{/if}}
+        {{#if tem_ppp}}<div class="sel-item"><div class="ck">✓</div><div>PPP — Perfil Profissiográfico Previdenciário</div></div>{{/if}}
+        {{#if tem_cat}}<div class="sel-item"><div class="ck">✓</div><div>Registro Médico para CAT</div></div>{{/if}}
+      </div>
+    </div>
+  </div>
+  {{else}}
+  <div class="sel-list a1-sel" style="margin-bottom:4mm">
+    {{#if tem_pgr}}<div class="sel-item"><div class="ck">✓</div><div>PGR — Programa de Gerenciamento de Riscos</div></div>{{/if}}
+    {{#if tem_pcmso}}<div class="sel-item"><div class="ck">✓</div><div>PCMSO — Controle Médico e Saúde Ocupacional</div></div>{{/if}}
+    {{#if tem_ltcat}}<div class="sel-item"><div class="ck">✓</div><div>LTCAT — Laudo Técnico de Condições Ambientais</div></div>{{/if}}
+    {{#if tem_insalubridade}}<div class="sel-item"><div class="ck">✓</div><div>Laudo de Insalubridade</div></div>{{/if}}
+    {{#if tem_periculosidade}}<div class="sel-item"><div class="ck">✓</div><div>Laudo de Periculosidade</div></div>{{/if}}
+    {{#if tem_mensageria}}<div class="sel-item"><div class="ck">✓</div><div>Mensageria eSocial (eventos de SST)</div></div>{{/if}}
+    {{#if tem_ppp}}<div class="sel-item"><div class="ck">✓</div><div>PPP — Perfil Profissiográfico Previdenciário</div></div>{{/if}}
+    {{#if tem_psicossocial}}<div class="sel-item"><div class="ck">✓</div><div>Fatores de Riscos Psicossociais (NR-01)</div></div>{{/if}}
+    {{#if tem_cat}}<div class="sel-item"><div class="ck">✓</div><div>Registro Médico para CAT</div></div>{{/if}}
+    {{#if tem_aso_incluido}}<div class="sel-item"><div class="ck">✓</div><div>ASO incluído na mensalidade</div></div>{{/if}}
+    {{#if tem_avaliacoes}}<div class="sel-item"><div class="ck">✓</div><div>Avaliações Ambientais: {{avaliacoes_lista}}</div></div>{{/if}}
+    {{#if outros_servicos_lista}}<div class="sel-item"><div class="ck">✓</div><div>{{outros_servicos_lista}}</div></div>{{/if}}
+  </div>
+  {{/if}}
+
+  <div class="card tint a1-card">
+    <div class="field-label" style="margin-bottom:2mm">Forma de pagamento</div>
+    {{#if is_misto}}
+    <div class="a1-cols">
+      <div>
+        <div class="pay-tag">Plano — mensalidade</div>
+        <div class="a1-pay">
+          <div><div class="field-label">Mensalidade</div><div class="field-value teal">{{mensalidade}}</div></div>
+          <div><div class="field-label">Valor por vida extra</div><div class="field-value">{{por_vida_extra}}</div></div>
+          <div><div class="field-label">Total do plano (12 meses)</div><div class="field-value">{{valor_total_plano}}</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="pay-tag">Avulso — programas e laudos</div>
+        <div class="a1-pay">
+          <div><div class="field-label">Valor total</div><div class="field-value teal">{{valor_total}}</div></div>
+          <div><div class="field-label">Parcelado em</div><div class="field-value">{{parcelas}}x de {{valor_parcela}}</div></div>
+          <div><div class="field-label">1&ordf; cobrança</div><div class="field-value">{{data_primeira_cobranca}}</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="min-desc">O preço dos serviços do <b>Plano</b> será de <b>{{valor_total_plano_ext}}</b>, dividido em
+      12 (doze) parcelas mensais e consecutivas de <b>{{mensalidade_ext}}</b>, vencendo-se a primeira parcela em
+      <b>{{data_primeira_cobranca}}</b>, considerando-se o <b>limite mínimo de {{numero_vidas}} funcionários</b> da CONTRATANTE.
+      Para cada empregado adicional cadastrado, será acrescido o valor de <b>{{por_vida_extra_ext}}</b> ao valor da parcela
+      ajustada. Em caso de redução do quadro, o valor será ajustado proporcionalmente, observado o valor mínimo mensal pactuado.</div>
+    {{else}}
+    {{#if is_plano}}
+    <div class="grid-3">
+      <div><div class="field-label">Mensalidade</div><div class="field-value teal">{{mensalidade}}</div></div>
+      <div><div class="field-label">Valor por vida extra</div><div class="field-value">{{por_vida_extra}}</div></div>
+      <div><div class="field-label">Valor total do plano (12 meses)</div><div class="field-value">{{valor_total_plano}}</div></div>
+    </div>
+    <div class="min-desc">O preço dos serviços do <b>Plano</b> será de <b>{{valor_total_plano_ext}}</b>, dividido em
+      12 (doze) parcelas mensais e consecutivas de <b>{{mensalidade_ext}}</b>, vencendo-se a primeira parcela em
+      <b>{{data_primeira_cobranca}}</b>, considerando-se o <b>limite mínimo de {{numero_vidas}} funcionários</b> da CONTRATANTE.
+      Para cada empregado adicional cadastrado, será acrescido o valor de <b>{{por_vida_extra_ext}}</b> ao valor da parcela
+      ajustada. Em caso de redução do quadro, o valor será ajustado proporcionalmente, observado o valor mínimo mensal pactuado.</div>
+    {{else}}
+    <div class="grid-3">
+      <div><div class="field-label">Valor total</div><div class="field-value teal">{{valor_total}}</div></div>
+      <div><div class="field-label">Parcelado em</div><div class="field-value">{{parcelas}}x de {{valor_parcela}}</div></div>
+      <div><div class="field-label">1&ordf; cobrança</div><div class="field-value">{{data_primeira_cobranca}}</div></div>
+    </div>
+    {{/if}}
+    {{/if}}
+    {{#if forma_pagamento}}<div class="a1-cond"><b>Condições:</b> {{forma_pagamento}}</div>{{/if}}
+  </div>
+
+  <div class="a1-foot">Anexo I · Condições Comerciais — parte integrante do Contrato de Prestação de Serviços · {{id_venda}}</div>
+</section>
+
+<!-- ===================== CONTRATO · CLÁUSULAS ===================== -->
+<section class="flow brk contract">
+  <div class="block-head">
+    <span class="logo-teal"></span>
+    <div class="bh-kicker">{{razao_social}}<b>Contrato de Prestação de Serviços</b></div>
+  </div>
+
+  <div class="eyebrow">Instrumento particular</div>
+  <h1 class="sec-title">Contrato de Prestação de Serviços</h1>
+  <div class="sec-rule"></div>
+
+  <div class="sec">Das Partes</div>
+  <p class="intro">Pelo presente instrumento particular, condições comerciais anexas definidas e na melhor forma de direito, as partes abaixo nomeadas e qualificadas contratam:</p>
+  <p class="intro"><b>EMPRESA</b> qualificada nas <b>CONDIÇÕES COMERCIAIS, ANEXO I</b> e parte integrante deste contrato, doravante denominada <b>CONTRATANTE</b>;</p>
+  <p class="intro"><b>REALIZA SOLUCOES EM MEDICINA E SEGURANCA DO TRABALHO S/S LTDA</b>, pessoa jurídica de direito privado, devidamente inscrita no CNPJ/MF sob o n.º 08.493.351/0001-93, com sede na Av. Alberto Bins, 658/402, Bairro Centro, cidade de Porto Alegre/RS, CEP 90030-140, neste ato representada na forma de seu Contrato Social, doravante denominada <b>CONTRATADA</b>;</p>
+  <p class="intro">De comum acordo, as partes acima qualificadas celebram o presente contrato, que reger-se-á pelas disposições legais aplicáveis à espécie e termos e condições das cláusulas abaixo descritas, a saber:</p>
+
+  <div class="sec">Do Objeto</div>
+  <div class="cl"><b class="cn">CLÁUSULA 1ª.</b> O objeto deste contrato é estabelecer direitos e deveres entre as partes, regulando a prestação somente dos serviços constantes nas <b>CONDIÇÕES COMERCIAIS</b> que define o escopo desta contratação e faz parte integrante deste contrato, podendo abranger os seguintes serviços:</div>
+
+  <div class="sec">Dos Serviços — Do PGR · Programa de Gerenciamento de Riscos</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 2ª.</b> O PGR será elaborado de acordo com a NR 01, com o objetivo de evitar os riscos ocupacionais que possam ser originados no trabalho, identificar os perigos e possíveis lesões ou agravos à saúde, avaliar os riscos ocupacionais indicando o nível de risco, classificar os riscos ocupacionais para determinar a necessidade de adoção de medidas de prevenção, implementar medidas de prevenção, de acordo com a classificação de risco e na ordem de prioridade estabelecida e acompanhar o controle dos riscos ocupacionais.</div>
+  <div class="par"><b>Parágrafo Único.</b> Para o prazo de entrega e a elaboração e conclusão do PGR será necessário:
+    <ol class="rlist rom">
+      <li>Fornecimento de informações completas da empresa e dos empregados (cargos, setores, descrição das atividades (até 900 caracteres), etc.) conforme folha de pagamento enviadas ao eSocial;</li>
+      <li>Agendamento da visita técnica em consenso entre as partes, conforme disponibilidade de agenda;</li>
+      <li>A entrega ocorrerá 30 dias após visita técnica e recebimento das informações completas.</li>
+    </ol>
+  </div>
+
+  <div class="sec">Da Declaração de Ausência de Riscos</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 3ª.</b> A Declaração de Ausência de Riscos é a emissão de Declaração para empresas tipo ME e EPP, grau de risco 1 e 2, que no levantamento preliminar de perigos não identificarem exposições ocupacionais a agentes físicos, químicos e biológicos, em conformidade com a NR9.</div>
+  <div class="par"><b>Parágrafo 1º.</b> O prazo de entrega é até 7 dias após avaliação do técnico responsável.</div>
+  <div class="par"><b>Parágrafo 2º.</b> A validade da Declaração de Ausência de Riscos será revisada anualmente, ou sempre que houver alteração nos critérios de enquadramento.</div>
+
+  <div class="sec">Do PCMSO · Programa de Controle Médico e Saúde Ocupacional</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 4ª.</b> O PCMSO será elaborado de acordo com a NR 7, com o objetivo de implementar nas empresas o controle de saúde dos trabalhadores em relação ao trabalho desenvolvido, as condições ambientais e a proteção contra os riscos que possam comprometer a saúde e a integridade dos trabalhadores. Compreende:
+    <ol class="rlist rom">
+      <li>Elaboração do Programa, controle e comunicação dos prazos dos exames periódicos e da documentação de seus colaboradores;</li>
+      <li>Realização de exames admissionais, periódicos, de retorno ao trabalho, de mudança de risco ocupacional e demissionais, compreendendo exames clínicos e complementares;</li>
+      <li>Emissão de Atestado de Saúde Ocupacional, atendendo os requisitos da NR 07;</li>
+      <li>Realização de outros exames complementares não previstos no PCMSO em vigor, mediante solicitação do Médico do Trabalho/Médico Examinador;</li>
+      <li>Elaboração de Relatório Analítico do PCMSO;</li>
+      <li>Gestão Médica e Responsabilidade Técnica pela NR-7.</li>
+    </ol>
+  </div>
+  <div class="par"><b>Parágrafo 1º.</b> O prazo de entrega do PCMSO elaborado pela Contratada será o mesmo do PGR, ou em até 5 (cinco) dias úteis após o recebimento de PGR, nos casos em que o mesmo é fornecido pela Contratante.</div>
+  <div class="par"><b>Parágrafo 2º.</b> Havendo a inclusão de fatores de risco e exames posteriormente à emissão do ASO, o empregado deverá retornar para complementar o ASO.</div>
+  <div class="par"><b>Parágrafo 3º.</b> <b>Validade.</b> O PCMSO será revisado anualmente, após a elaboração do Relatório Analítico, e reemitido caso haja necessidade.</div>
+
+  <div class="sec">Da Realização de Exames Clínicos e Complementares para Emissão do ASO · Atestado de Saúde Ocupacional</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 5ª.</b> O agendamento de exames ocorrerá através do sistema web e é de total responsabilidade da Contratante, de forma a garantir que seus empregados compareçam para exames em tempo hábil para evitar os vencimentos dos Atestados de Saúde Ocupacionais. Será fornecido ao cliente um usuário/senha e Manual do Sistema Web, bem como suporte por e-mail e WhatsApp.</div>
+  <div class="par"><b>Parágrafo 1º.</b> Na home https://www.realiza-sst.com.br está disponível o Manual do Sistema Web com as instruções para uso do sistema. Semanalmente é realizado treinamento online gratuito para utilização do sistema.</div>
+  <div class="par"><b>Parágrafo 2º.</b> Mediante solicitação formal e sem custo, poderão ser criados usuários adicionais para acesso ao sistema web. É responsabilidade da CONTRATANTE solicitar que o(s) usuário(s) seja(m) inativado(s) por demissão ou qualquer outro motivo, a fim de cessar o acesso aos dados e documentos da CONTRATANTE e de seus empregados.</div>
+  <div class="par"><b>Parágrafo 3º.</b> No agendamento de ASO admissional, caberá à CONTRATANTE a inclusão correta dos dados cadastrais dos empregados, incluindo nome, data de nascimento, CPF, matrícula do eSocial, cargo e setor, data efetiva de admissão e demissão.</div>
+  <div class="par"><b>Parágrafo 4º.</b> A Requisição de Atendimento, extraída do sistema após o agendamento, descreve as orientações para o empregado realizar os exames.</div>
+  <div class="par"><b>Parágrafo 5º.</b> Orientamos que os agendamentos cujo paciente não possa comparecer sejam desmarcados/remarcados para disponibilizar o horário para o atendimento de outro paciente. Os agendamentos não comparecidos ou desmarcados/remarcados com menos de 24h de antecedência serão cobrados, aplicando-se o valor do ASO praticado na ocasião.</div>
+  <div class="par"><b>Parágrafo 6º.</b> O ASO é disponibilizado no sistema após a sua conclusão para download.</div>
+  <div class="par"><b>Parágrafo 7º.</b> Os exames complementares serão enviados por meio eletrônico ao empregado ou impressos, quando solicitado, garantindo sigilo médico obrigatório.</div>
+  <div class="par"><b>Parágrafo 8º.</b> O sistema web RSData/DataSEESMT envia regularmente mensagens por e-mail comunicando o vencimento de exames vencidos e a vencer. É da CONTRATANTE a responsabilidade pelo agendamento e encaminhamento dos empregados para realização dos exames antes do vencimento, considerando o prazo necessário para conclusão dos exames complementares e exame clínico.</div>
+  <div class="par"><b>Parágrafo 9º.</b> A CONTRATANTE é responsável por comunicar alterações de setores e cargos para adequação da documentação e envio dos eventos de SST ao eSocial. Também é responsável por agendar o ASO de Mudança de Riscos antes da alteração na folha de pagamento, quando aplicável, conforme determina a NR 7.</div>
+
+  <div class="sec">Do LTCAT · Laudo Técnico de Condições Ambientais do Trabalho</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 6ª.</b> O LTCAT é elaborado de acordo com as legislações previdenciárias vigentes no momento da emissão do Laudo, com o objetivo de comprovar ou não a efetiva exposição dos trabalhadores a agentes nocivos que dão direito à aposentadoria especial, orientar o preenchimento da GFIP e fornecer a base para elaboração do PPP — Perfil Profissiográfico Previdenciário.</div>
+  <div class="par"><b>Parágrafo 1º.</b> O prazo de entrega do LTCAT é de até 30 (trinta) dias após o recebimento dos resultados das avaliações ambientais de agentes químicos ou após a conclusão das avaliações ambientais de agentes físicos (ruído, calor e vibração), o que ocorrer por último.</div>
+  <div class="par"><b>Parágrafo 2º.</b> O LTCAT terá sua validade estabelecida no documento, podendo ser revisado após a realização de avaliações ambientais aplicáveis, ou sob demanda, e será reemitido sempre que houver alterações.</div>
+
+  <div class="sec">Das Avaliações Ambientais de Agentes Físicos e Químicos</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 7ª.</b> Nas Avaliações ambientais de agentes físicos e químicos são realizadas medições quantitativas de agentes físicos e químicos com limite de tolerância estabelecidos pela NR 15 — Atividades Insalubres do MTE e/ou ACGIH, conforme GSE estabelecido ou pontos fixos.</div>
+  <div class="par"><b>Parágrafo 1º.</b> Para avaliação dos agentes, serão utilizadas as metodologias e os procedimentos de avaliação estabelecidos pelas Normas de Higiene Ocupacional — NHO da FUNDACENTRO, os limites de tolerância estabelecidos pela NR-15 do MTE ou limites de tolerância da ACGIH, conforme a finalidade das medições.</div>
+  <div class="par"><b>Parágrafo 2º.</b> A quantidade de avaliações ambientais é estimada a partir das informações disponíveis e poderá ser alterada para mais ou para menos conforme critérios técnicos, gerando os devidos ajustes necessários no orçamento.</div>
+  <div class="par"><b>Parágrafo 3º.</b> Quando não houver informações disponíveis para elaboração do orçamento, a quantidade de medições será determinada após análise técnica dos Grupos de Exposição Similar.</div>
+  <div class="par"><b>Parágrafo 4º.</b> O prazo de entrega das avaliações ambientais dependerá dos agendamentos realizados, considerando a disponibilidade das partes.
+    <ol class="rlist rom">
+      <li>O resultado das avaliações ambientais dos riscos físicos é imediato, após baixar as informações dos equipamentos. O relatório técnico contendo os resultados destas avaliações será entregue juntamente com os demais programas e laudos;</li>
+      <li>O resultado das avaliações ambientais de agentes químicos depende do prazo informado pelo laboratório de análises.</li>
+    </ol>
+  </div>
+  <div class="par"><b>Parágrafo 5º.</b> <b>Validade:</b> Sempre que necessário e para renovação do Laudo de Insalubridade e LTCAT deverá ser realizada nova campanha de avaliações ambientais, cujos critérios estarão descritos em detalhe no PGR considerando os resultados obtidos em campanhas anteriores quando houver.</div>
+
+  <div class="sec">Do Laudo de Insalubridade</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 8ª.</b> O Laudo de Insalubridade é elaborado de acordo com a NR 15, com o objetivo de comprovar ou não a efetiva exposição dos trabalhadores a agentes insalubres que determinam o pagamento de adicional de insalubridade.</div>
+  <div class="par"><b>Parágrafo 1º.</b> O prazo de entrega do Laudo de Insalubridade é de até 30 (trinta) dias após o recebimento dos resultados das avaliações ambientais de agentes químicos ou após a conclusão das avaliações ambientais de agentes físicos (ruído, calor e vibração), o que ocorrer por último.</div>
+  <div class="par"><b>Parágrafo 2º.</b> O Laudo de Insalubridade terá sua validade estabelecida no documento, podendo ser revisado após a realização de avaliações ambientais aplicáveis, ou sob demanda, e será reemitido sempre que houver alterações.</div>
+
+  <div class="sec">Do Laudo de Periculosidade</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 9ª.</b> O Laudo de Periculosidade é elaborado de acordo com a NR 16, com o objetivo de comprovar ou não a efetiva exposição dos trabalhadores a agentes periculosos que determinam o pagamento de adicional de periculosidade.</div>
+  <div class="par"><b>Parágrafo 1º.</b> O prazo de entrega do Laudo de Periculosidade será de 30 (trinta) dias úteis ou em prazo consensado entre as partes.</div>
+  <div class="par"><b>Parágrafo 2º.</b> A validade do Laudo de Periculosidade deverá ser avaliada sempre que a Contratante sinalizar alterações relacionadas à periculosidade nos postos de trabalho ou nas atividades.</div>
+
+  <div class="sec">Do Serviço de Mensageria dos Eventos de SST e eSocial</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 10.</b> Envio das informações ao eSocial relativas aos eventos S-2210, S-2220 e S-2240, recebimento do arquivo de retorno do eSocial, análise e correção de eventuais inconsistências ou erros, conforme descrito a seguir:</div>
+  <div class="par"><b>Parágrafo 1º.</b> <b>S-2210 — Comunicação de Acidente de Trabalho:</b> Utilizado para o envio da CAT pelo empregador/tomador de mão-de-obra de trabalhador avulso e empregador doméstico.
+    <ol class="rlist rom">
+      <li>A comunicação do acidente de trabalho deve ser registrada até o primeiro dia útil seguinte ao da ocorrência e, em caso de morte, de imediato;</li>
+      <li>Neste evento, a CONTRATANTE é responsável pela inclusão da CAT no sistema web e pela comunicação à CONTRATADA para envio, bem como pelo encaminhamento do empregado para conclusão da parte médica, não cabendo à CONTRATADA qualquer responsabilidade pelo descumprimento do prazo.</li>
+    </ol>
+  </div>
+  <div class="par"><b>Parágrafo 2º.</b> <b>S-2220 — Monitoramento da saúde do trabalhador:</b> Neste evento é feito o acompanhamento da saúde do trabalhador durante o seu contrato de trabalho, com as informações relativas aos ASO e seus exames complementares.
+    <ol class="rlist rom">
+      <li>O evento deve ser enviado até o dia 15 (quinze) do mês subsequente ao da realização do correspondente exame (ASO). Essa regra não altera o prazo legal para a realização dos exames, que deve seguir o previsto na legislação, sendo que somente o registro da informação no eSocial é permitido até o dia 15 (quinze) do mês subsequente;</li>
+      <li>Não integram este evento as informações constantes em atestados médicos, nos casos de afastamento do trabalhador por doença ou acidente;</li>
+      <li>Neste evento, a CONTRATANTE é responsável pela inclusão dos dados cadastrais no sistema web para realização do ASO admissional incluindo nome, data de nascimento, CPF, matrícula, cargo e setor, bem como é responsável pelo fornecimento dos dados cadastrais completos e corretos, incluindo a matrícula no eSocial dos demais empregados para saneamento dos dados. A descrição das atividades do cargo não poderá ultrapassar 999 caracteres para envio ao eSocial;</li>
+      <li>É responsabilidade da Contratante a contratação da renovação do PCMSO sempre que houver mudanças no PGR, bem como o encaminhamento dos empregados para realização dos exames periódicos antes do seu vencimento, observando o prazo de conclusão dos resultados dos exames complementares, não cabendo à CONTRATADA qualquer responsabilidade decorrente do atraso no cumprimento dos prazos previstos na NR7.</li>
+    </ol>
+  </div>
+  <div class="par"><b>Parágrafo 3º.</b> <b>S-2240 — Condições Ambientais do Trabalho — Agentes Nocivos:</b> São prestadas as informações da exposição do trabalhador aos agentes nocivos, conforme “Tabela 24 — Agentes Nocivos e Atividades — Aposentadoria Especial” do eSocial e identificados os agentes nocivos aos quais o trabalhador está exposto.
+    <ol class="rlist rom">
+      <li>Deve também ser declarada a existência de EPC instalados, bem como os EPI disponibilizados. A informação relativa aos EPIs não substitui a obrigatoriedade do registro de entrega destes equipamentos conforme disposição normativa;</li>
+      <li>A exposição a qualquer dos agentes nocivos previstos no anexo IV do Regulamento da Previdência Social, aprovado pelo Decreto nº. 3.048, de 1999, deve ser informada. Caso não haja exposição a risco, deve ser informado o código 09.01.001 (Ausência de fator de risco ou de atividades previstas no Anexo IV do Decreto 3.048/1999) da Tabela 24;</li>
+      <li>As informações prestadas neste evento compõem o PPP do trabalhador, sendo que para o período anterior ao início da obrigatoriedade dos eventos de SST são utilizados os procedimentos vigentes à época;</li>
+      <li>Prazo de envio: até o dia 15 (quinze) do mês subsequente ao início da obrigatoriedade dos eventos de SST ou do ingresso/admissão do trabalhador. No caso de alterações da informação inicial, deve ser enviado até o dia 15 (quinze) do mês subsequente à ocorrência da alteração;</li>
+      <li>Neste evento, a CONTRATANTE é responsável pela contratação da elaboração do LTCAT e renovação anual antes do vencimento, considerando os prazos necessários para realização de avaliações ambientais eventualmente necessárias e prazos necessários para emissão dos documentos. É responsável por aprovar o LTCAT antes do envio das informações ao eSocial, bem como utilizar as informações do mesmo para fornecimento das informações no evento S-1200. Também é responsável por informar qualquer alteração nas atividades e/ou no ambiente de trabalho que ensejem a atualização do Laudo. A CONTRATANTE deverá fazer a gestão de EPI de acordo com as exigências da NR 6, informando CA, eficácia e demais informações requisitadas para o LTCAT;</li>
+      <li>Não cabe à CONTRATADA qualquer responsabilidade decorrente da omissão de informações ou do fornecimento de informações incompletas ou equivocadas, bem como pelo descumprimento dos prazos de elaboração dos laudos/avaliações ambientais devido à contratação fora do prazo;</li>
+      <li>Importante esclarecer que nos eventos acima elencados é constituído o histórico das exposições a agentes nocivos para fins de aposentadoria especial, sendo que a declaração relativa ao adicional para o financiamento da aposentadoria especial é feita quando informado o grau de exposição no evento S-1200, utilizando-se dos códigos previstos na “Tabela 02 — Financiamento da Aposent. Especial e Redução do Tempo de Contrib. do eSocial”.</li>
+    </ol>
+  </div>
+  <div class="par"><b>Parágrafo 4º.</b> <b>Serviços complementares ao Serviço de Mensageria:</b>
+    <ol class="rlist rom">
+      <li>Parametrização — consiste na parametrização dos serviços, saneamento dos dados e verificação de inconsistências para envio dos eventos de SST ao eSocial;</li>
+      <li>Suporte Técnico — consiste no atendimento ao usuário para esclarecimentos e orientações de como utilizar o sistema web para acesso às informações do eSocial. O suporte estará disponível por e-mail e os questionamentos encaminhados pelos usuários serão respondidos por e-mail.</li>
+    </ol>
+  </div>
+  <div class="par"><b>Parágrafo 5º.</b> <b>Pré-requisitos do Serviço de Mensageria:</b>
+    <ol class="rlist rom">
+      <li>Contratação dos serviços de Medicina Ocupacional e elaboração de LTCAT — Laudo Técnico das Condições do Ambiente de Trabalho em conformidade com a Legislação Previdenciária;</li>
+      <li>Pré-requisitos de folha de pagamento: envio do evento S-2190 (ou, alternativamente, do S-2200) ou do S-2300 ao eSocial, sendo: a) S-2190 — Registro Preliminar de Trabalhador; b) S-2200 — Cadastramento Inicial do Vínculo e Admissão/Ingresso de Trabalhador; c) S-2300 — Trabalhador Sem Vínculo de Emprego/Estatutário;</li>
+      <li>Envio dos dados cadastrais dos empregados em planilha Excel (modelo fornecido pela CONTRATADA) exatamente como foram enviados ao eSocial nos eventos citados anteriormente, compreendendo: Nome completo, Data de Nascimento, Sexo, CPF, RG, Matrícula no eSocial, Setor, Cargo, CBO, Descrição das Atividades do Cargo;</li>
+      <li>Emissão de Procuração para envio dos eventos de SST no Portal do e-CAC (https://cav.receita.fazenda.gov.br/autenticacao/login);</li>
+      <li>Assinatura de Declaração de Ciência e Concordância com os Termos e Conclusões do LTCAT antes do envio do evento S-2240 — Agentes Nocivos;</li>
+      <li>Encaminhamento dos empregados para realização de ASOs e exames complementares cumprindo o PCMSO;</li>
+      <li>Inclusão de CAT — Comunicação de Acidente de Trabalho no sistema dataSEESMT, podendo solicitar este serviço para a CONTRATADA.</li>
+    </ol>
+  </div>
+  <div class="par"><b>Parágrafo 6º.</b> <b>Prazos do Serviço de Mensageria:</b>
+    <ol class="rlist rom">
+      <li><b>1ª Etapa:</b> a) Fornecimento de informações completas da empresa e dos empregados conforme folha de pagamento — Responsável: Contratante; Prazo: imediatamente após a contratação dos serviços de mensageria; b) Parametrização para envio dos eventos de SST ao eSocial — Responsável: Contratada; Prazo: imediato; c) Inclusão e/ou Saneamento dos dados dos empregados no sistema web — Responsável: Contratante/Contratada; Prazo: 10 dias;</li>
+      <li><b>2ª Etapa:</b> a) Envio de empregados para realização de exames periódicos eventualmente pendentes — S-2220 — Monitoramento da saúde do trabalhador — Responsável: Contratante; Prazo: imediato; b) Instrução para uso do sistema para S-2210 — Comunicação de Acidente de Trabalho através do Manual do Sistema Web — Responsável: Contratada; Prazo: treinamento semanal, online; c) Carga inicial — S-2240 — Condições Ambientais do Trabalho — Agentes Nocivos — Responsável: Contratada; Prazo: até 24 horas após a aprovação do LTCAT;</li>
+      <li><b>3ª Etapa:</b> a) Envio mensal dos eventos nos prazos estabelecidos — Responsável: Contratada; Prazo: mensalmente; b) Análise do retorno do processamento do eSocial e eventuais inconsistências — Responsável: Contratante/Contratada; Prazo: mensalmente; c) Solução de eventuais erros e/ou inconsistências e reenvio dos eventos — Responsável: Contratante/Contratada; Prazo: mensalmente.</li>
+    </ol>
+  </div>
+
+  <div class="sec">Da Avaliação de Fatores de Riscos Psicossociais</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 11.</b> A avaliação de Fatores de Riscos Psicossociais relacionados ao trabalho será realizada em conformidade com a Norma Regulamentadora n.º 01 (NR-1) do Ministério do Trabalho e Emprego e com a Lei n.º 13.709/2018 (LGPD), com o objetivo de identificar, avaliar e classificar os riscos de natureza psicossocial presentes no ambiente de trabalho da CONTRATANTE e subsidiar as medidas de prevenção a serem implementadas, compreendendo:
+    <ol class="rlist rom">
+      <li><b>Aplicação de Questionário de Fatores de Riscos Psicossociais:</b> elaboração e aplicação de instrumento de coleta de dados junto aos empregados da CONTRATANTE, com vistas ao mapeamento da percepção dos trabalhadores sobre o ambiente organizacional, a gestão e os riscos ocupacionais de natureza psicossocial, garantido o anonimato dos respondentes e o tratamento sigiloso das informações;</li>
+      <li><b>Análise dos resultados e emissão do Radar de Fatores de Riscos Psicossociais:</b> processamento e análise dos dados coletados, com elaboração de relatório técnico diagnóstico identificando os principais riscos presentes no ambiente de trabalho da CONTRATANTE, por setor ou Grupo de Exposição Similar, conforme aplicável;</li>
+      <li><b>Atualização do PGR — Programa de Gerenciamento de Riscos:</b> revisão e atualização do inventário de riscos e do plano de ação do PGR da CONTRATANTE para incorporar os riscos psicossociais identificados, de acordo com os requisitos da NR-1 e demais normas regulamentadoras pertinentes;</li>
+      <li><b>Elaboração do Plano de Ação para Riscos Psicossociais:</b> com base no diagnóstico obtido, elaboração de Plano de Ação contendo medidas de prevenção, controle e mitigação dos riscos identificados, com indicação de responsáveis, prazos e indicadores de acompanhamento.</li>
+    </ol>
+  </div>
+  <div class="par"><b>Parágrafo 1º.</b> Os serviços serão prestados na modalidade híbrida, compreendendo atividades realizadas presencialmente nas dependências da CONTRATANTE e atividades executadas remotamente pela CONTRATADA, conforme cronograma acordado entre as partes.</div>
+  <div class="par"><b>Parágrafo 2º.</b> A remuneração dos serviços descritos nesta Cláusula observará o assinalado nas CONDIÇÕES COMERCIAIS, ANEXO I, parte integrante deste contrato, considerado o número de empregados nele indicado. Não estando os serviços desta Cláusula assinalados nas CONDIÇÕES COMERCIAIS, sua execução dependerá de contratação específica, sendo orçada e cobrada na forma da Cláusula 29.</div>
+  <div class="par"><b>Parágrafo 3º.</b> A avaliação será revisada anualmente, no aniversário do contrato, ou sempre que houver alteração relevante na organização do trabalho, na estrutura de cargos e setores, ou na ocorrência de eventos que indiquem agravamento dos riscos psicossociais.</div>
+  <div class="par"><b>Parágrafo 4º.</b> Não estão compreendidos nesta Cláusula o acompanhamento psicológico, a avaliação psicológica ou psiquiátrica individual, o atendimento clínico ou terapêutico dos empregados, tampouco a execução das medidas constantes do Plano de Ação, os quais, quando demandados, serão orçados e cobrados conforme o ANEXO II ou Condições Comerciais específicas.</div>
+
+  <div class="cl-open"><b class="cn">CLÁUSULA 12.</b> A execução dos serviços previstos na Cláusula 11 observará o cronograma de etapas descrito nesta Cláusula, cujos prazos são contados em dias corridos a partir dos respectivos marcos de início, salvo disposição em contrário acordada por escrito entre as partes.</div>
+  <div class="par"><b>Parágrafo 1º.</b> <b>ETAPA 1 — Identificação dos Riscos Psicossociais:</b> compreende a aplicação do questionário de fatores psicossociais, o processamento dos dados e a elaboração do Radar de Fatores de Riscos Psicossociais. Prazo: 21 (vinte e um) dias corridos contados da data de conclusão da coleta do questionário, assim entendida a data limite de resposta fixada de comum acordo entre as partes.</div>
+  <div class="par"><b>Parágrafo 2º.</b> <b>ETAPA 2 — Avaliação dos Riscos Psicossociais:</b> compreende a apresentação dos resultados à gerência da CONTRATANTE e a elaboração da proposta de atualização do PGR. Prazo: 21 (vinte e um) dias corridos contados da realização da Reunião com a Gerência da CONTRATANTE.</div>
+  <div class="par"><b>Parágrafo 3º.</b> <b>ETAPA 3 — Conclusão e Entrega:</b> compreende a elaboração e entrega do Plano de Ação para Riscos Psicossociais e da versão atualizada do PGR. Prazo: 21 (vinte e um) dias corridos contados da realização da Apresentação dos resultados à CONTRATANTE.</div>
+  <div class="par"><b>Parágrafo 4º.</b> Os marcos de início de cada etapa — conclusão do questionário, Reunião com a Gerência e Apresentação dos resultados — serão agendados de comum acordo entre as partes, com antecedência mínima de 5 (cinco) dias úteis, mediante comunicação formal por e-mail.</div>
+  <div class="par"><b>Parágrafo 5º.</b> Considerar-se-á encerrada a coleta do questionário na data limite de resposta fixada entre as partes, independentemente do percentual de adesão dos empregados, hipótese em que o Radar de Fatores de Riscos Psicossociais e o Plano de Ação serão elaborados com base nas respostas efetivamente obtidas.</div>
+  <div class="par"><b>Parágrafo 6º.</b> Os prazos ficam automaticamente suspensos nos casos em que seu cumprimento dependa de informações, documentos, autorizações ou providências a cargo exclusivo da CONTRATANTE e que não tenham sido fornecidos tempestivamente, retomando a contagem a partir do dia útil seguinte ao suprimento da pendência.</div>
+  <div class="par"><b>Parágrafo 7º.</b> Qualquer alteração nos prazos ou no cronograma deverá ser formalizada por escrito entre as partes.</div>
+
+  <div class="cl-open"><b class="cn">CLÁUSULA 13.</b> São obrigações da CONTRATANTE para a execução dos serviços previstos nas Cláusulas 11 e 12:
+    <ol class="rlist rom">
+      <li>Disponibilizar acesso aos seus empregados para fins de aplicação do questionário, nos prazos e condições acordados, bem como divulgar internamente a iniciativa de modo a estimular a participação;</li>
+      <li>Garantir o comparecimento de representantes com poderes decisórios nas reuniões de apresentação e alinhamento previstas no cronograma;</li>
+      <li>Fornecer as informações organizacionais necessárias à execução dos serviços, incluindo organograma, descrição de cargos, setores e demais dados pertinentes ao ambiente de trabalho;</li>
+      <li>Obter de cada empregado participante a autorização para coleta e tratamento de seus dados, nos termos da LGPD e conforme o disposto nas Cláusulas 31 e 32 deste contrato;</li>
+      <li>Implementar as medidas constantes do Plano de Ação, cuja execução é de sua responsabilidade exclusiva, nos termos da Cláusula 19.</li>
+    </ol>
+  </div>
+  <div class="par"><b>Parágrafo 1º.</b> Os dados pessoais e as informações dos empregados coletados em razão da execução dos serviços previstos nas Cláusulas 11 a 13 serão tratados em estrita conformidade com a Lei n.º 13.709/2018 (LGPD) e utilizados exclusivamente para as finalidades aqui previstas. A CONTRATADA compromete-se a manter sigilo absoluto quanto à identidade dos respondentes do questionário, garantindo o anonimato das respostas individuais, cujos resultados serão apresentados de forma consolidada.</div>
+  <div class="par"><b>Parágrafo 2º.</b> Não caberá à CONTRATADA qualquer responsabilidade decorrente da omissão ou do fornecimento de informações incorretas ou incompletas pela CONTRATANTE, tampouco pelo descumprimento dos prazos de execução em razão de ausência de empregados, de baixa adesão ao questionário ou da não realização das reuniões previstas no cronograma.</div>
+
+  <div class="sec">Das Condições Comuns à Prestação dos Serviços</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 14.</b> Os serviços contratados serão prestados nos termos descritos acima, no que corresponder, respectivamente, aos valores e serviços descritos nas <b>CONDIÇÕES COMERCIAIS</b> e aceitas pelo CONTRATANTE.</div>
+  <div class="par"><b>Parágrafo 1º.</b> O início da prestação dos serviços ocorrerá nas seguintes etapas: I — Aceite das Condições Comerciais; II — Assinatura do Contrato; III — Liberação Financeira; IV — Fornecimento de informações completas, pelo Contratante; V — Início dos serviços.</div>
+  <div class="par"><b>Parágrafo 2º.</b> Para o bom andamento dos serviços será indispensável a participação da CONTRATANTE para fornecimento de informações e dados, pagamento, agendamento da visita técnica e implantação dos serviços.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 15.</b> Em conformidade com a NR 1, os programas, laudos e ASOs serão disponibilizados exclusivamente em formato pdf (Portable Document Format — PDF de qualidade padrão PDF/A-1) com assinatura digital certificada para download via sistema web.
+    <div class="par"><b>Parágrafo único:</b> Mediante cadastro de e-mail, o ASO será enviado pelo sistema automaticamente assim que concluído.</div>
+  </div>
+  <div class="cl"><b class="cn">CLÁUSULA 16.</b> Os serviços poderão contemplar a emissão de ART — Anotação de Responsabilidade Técnica junto ao CREA, mediante solicitação antecipada e aprovação do valor do pagamento ao CREA por parte da Contratante.
+    <div class="par"><b>Parágrafo único:</b> O prazo para emissão de ART junto ao órgão é de 48 horas.</div>
+  </div>
+  <div class="cl"><b class="cn">CLÁUSULA 17.</b> A elaboração de programas e realização de exames atenderá aos requisitos especificados pelo tomador de serviços da empresa CONTRATANTE, desde que não sejam conflitantes com a legislação vigente, os quais devem ser informados previamente, se houver.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 18.</b> Caberá à CONTRATANTE a conferência e a validação das informações contidas nos documentos fornecidos pela CONTRATADA (ASOs, programas, laudos, etc.), devendo a CONTRATANTE zelar pelo uso das informações, não cabendo à CONTRATADA qualquer responsabilidade.
+    <div class="par"><b>Parágrafo único:</b> Caberá, ainda, à CONTRATANTE a responsabilidade pela contratação e renovação tempestiva dos serviços conforme informações eletrônicas disponibilizadas pelo sistema WEB.</div>
+  </div>
+  <div class="cl"><b class="cn">CLÁUSULA 19.</b> A gestão interna e implementação das informações contidas nos programas e laudos, incluindo planos de ação, ações preventivas ou corretivas e recomendações, é responsabilidade exclusiva da CONTRATANTE e não está inclusa na prestação de serviços contratada.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 20.</b> Em caso de problemas de força maior (falta de luz, indisponibilidade ou lentidão dos serviços de internet, etc.) não haverá qualquer responsabilidade da CONTRATADA por prejuízos da CONTRATANTE quanto à não apresentação ou atraso no envio das informações ou na indisponibilidade dos serviços de suporte técnico pelos mesmos motivos.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 21.</b> Não caberá à CONTRATADA a imputação de qualquer responsabilidade por notificações e/ou multas aplicadas à CONTRATANTE decorrentes do não cumprimento das obrigações legais e contratuais que lhes cabem.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 22.</b> A CONTRATADA disponibiliza diversos canais para agilizar a comunicação com seus clientes. Assuntos de maior complexidade ou impacto são registrados por e-mail, já que os serviços envolvem obrigações legais sujeitas a notificações e multas. Sendo assim, recomendamos fortemente ler atentamente e-mails recebidos, incluindo os e-mails enviados pelo sistema utilizado.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 23.</b> Este contrato não contempla a totalidade das obrigações previstas nas Normas Regulamentadoras, cabendo à CONTRATANTE a responsabilidade pela verificação das demais normas aplicáveis e seu cumprimento e solicitação de orçamento para os serviços pertinentes.</div>
+
+  <div class="sec">Das Condições de Pagamento</div>
+  <div class="cl"><b class="cn">CLÁUSULA 24.</b> O pagamento da primeira parcela e a utilização dos serviços por parte da CONTRATANTE manifesta concordância dela com as CONDIÇÕES COMERCIAIS e do CONTRATO DE PRESTAÇÃO DE SERVIÇOS, ainda que elas não tenham sido assinadas.</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 25.</b> <b>Exames clínicos e exames complementares para emissão do ASO:</b> Faturamento mensal conforme <b>ANEXO II — Tabela de Preços</b> acordada nas Condições Comerciais aceitas pelo Contratante.</div>
+  <div class="par"><b>Parágrafo 1º.</b> O período de apuração para o faturamento mensal se encerra no dia 25 de cada mês com vencimento no dia <span class="fill">{{dia_vencimento}} ({{dia_vencimento_ext}})</span> do mês subsequente ao da prestação dos serviços.</div>
+  <div class="par"><b>Parágrafo 2º.</b> Exames complementares e outros serviços eventualmente necessários e não considerados na tabela acordada serão cobrados de acordo com a tabela de preços vigente na ocasião da utilização deles.</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 26.</b> <b>Mensalidades:</b> Faturamento mensal conforme Condições Comerciais e seus respectivos reajustes contratuais, iniciando na data do aceite das CONDIÇÕES COMERCIAIS.</div>
+  <div class="par"><b>Parágrafo 1º.</b> O período de apuração para o faturamento mensal se encerra no dia 25 de cada mês com vencimento no dia <span class="fill">{{dia_vencimento}} ({{dia_vencimento_ext}})</span> do mês subsequente ao da prestação dos serviços e, em caso de mensalidades por funcionários, dirá respeito ao número de funcionários cadastrados no sistema, incluindo afastados por qualquer motivo.</div>
+  <div class="par"><b>Parágrafo 2º.</b> É de responsabilidade da Contratante a manutenção deste número, principalmente a informação das demissões ocorridas sem emissão de ASO, que não saem automaticamente do sistema.</div>
+  <div class="par"><b>Parágrafo 3º.</b> A quantidade de mensalidades, cobradas por funcionário, não poderá ser inferior ao limite mínimo estabelecido nas condições comerciais.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 27.</b> <b>Programas e Laudos, não incluídos em mensalidades:</b> Em 2 (duas) parcelas iniciando na autorização dos serviços, que se dá somente após o pagamento da primeira parcela.</div>
+
+  <div class="sec">Do Reajuste</div>
+  <div class="cl"><b class="cn">CLÁUSULA 28.</b> Exames e mensalidades serão reajustados anualmente, no aniversário do contrato, com base no Índice Nacional de Preços ao Consumidor Amplo (IPCA), acumulado nos últimos 12 meses, divulgado pelo Instituto Brasileiro de Geografia e Estatística (IBGE) ou outro índice oficial que venha a substituí-lo.
+    <div class="par"><b>Parágrafo único:</b> Em situações extraordinárias que impactem as condições econômico-financeiras do contrato, as partes reconhecem a possibilidade de renegociar o índice de reajuste, através da livre negociação.</div>
+  </div>
+  <div class="cl"><b class="cn">CLÁUSULA 29.</b> Programas, Laudos e Avaliações Ambientais NÃO incluídos em mensalidades: serão orçados quando houver necessidade, tanto para emissão quanto para renovação, e cobrados conforme Condições Comerciais estabelecidas para a demanda específica.</div>
+
+  <div class="sec">Do Inadimplemento</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 30.</b> O inadimplemento de qualquer das parcelas contratualizadas implicará no vencimento antecipado das demais, acrescido de juros moratórios de 12% (doze por cento) ao ano e multa de 2% (dois por cento) sobre o valor do débito, bloqueio no sistema para novos agendamentos ou atendimentos e retenção dos documentos correspondentes aos pagamentos pendentes.</div>
+  <div class="par"><b>Parágrafo 1º.</b> Os créditos aqui previstos serão representados por faturas/duplicatas de prestação de serviços, valendo este instrumento como comprovante de solicitação dos serviços representados pelo título.</div>
+  <div class="par"><b>Parágrafo 2º.</b> O inadimplemento de qualquer das parcelas implicará na inclusão do nome da CONTRATANTE perante os cadastros negativos de crédito ao consumidor e empresas.</div>
+
+  <div class="sec">Da Lei Geral de Proteção de Dados</div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 31.</b> A partir da contratação dos serviços, a CONTRATANTE autoriza a CONTRATADA a realizar a coleta e tratamento de dados e documentos dos seus empregados relacionados abaixo, não se limitando, mas incluindo as seguintes finalidades:
+    <ol class="rlist rom">
+      <li>Armazenamento dos dados, inclusive os dados sensíveis, no Banco de Dados da Contratada, que poderá ser qualquer sistema informatizado, planilha eletrônica ou meio físico;</li>
+      <li>Utilização para fins de emissão de documentos pertinentes ao cumprimento da NR 7, no que tange à realização de exames clínicos e complementares, emissão dos resultados dos exames, emissão de ASO — Atestado de Saúde Ocupacional, entre outros;</li>
+      <li>Utilização para fins de encaminhamento do empregado para empresas conveniadas pela CONTRATADA para realização de avaliações com especialistas ou realização de exames complementares;</li>
+      <li>Utilização para fins de emissão de laudos médicos ou periciais, tanto relativos à segurança do trabalho, quanto medicina ocupacional;</li>
+      <li>Utilização para fins de registros, controles, certificados de treinamento, pesquisa de satisfação, entre outras atividades pertinentes ao presente contrato;</li>
+      <li>E-mail e telefone para fins de comunicação relativa à realização de exames, envio de resultados de exames, envio de pesquisas de satisfação, envio de informações sobre os serviços oferecidos pela CONTRATADA, entre outras finalidades pertinentes ao presente contrato.</li>
+    </ol>
+  </div>
+  <div class="cl-open"><b class="cn">CLÁUSULA 32.</b> A CONTRATANTE reconhece que solicita as autorizações por escrito, de cada um de seus empregados, para a coleta e tratamento dos dados necessários exclusivamente para fins deste contrato:
+    <ol class="rlist rom">
+      <li>Nome / Data de Nascimento / Sexo;</li>
+      <li>N° RG, N° da Carteira de Trabalho ou outro documento de identificação / N° CPF / matrícula eSocial;</li>
+      <li>Tipo Sanguíneo / Peso e altura;</li>
+      <li>Histórico de saúde pessoal, incluindo deficiência física e histórico de saúde familiar e histórico profissional;</li>
+      <li>E-mail e telefone;</li>
+      <li>Outros dados ou informações existentes e necessárias para fins do eSocial e outros sistemas do Governo existentes ou que poderão ser criados.</li>
+    </ol>
+  </div>
+
+  <div class="sec">Do Encerramento da Prestação dos Serviços</div>
+  <div class="cl"><b class="cn">CLÁUSULA 33.</b> A prestação de serviços tem prazo de vigência de 12 (doze) meses, contados da data de aceite das Condições Comerciais, podendo ser prorrogada automaticamente por prazo indeterminado, caso não haja manifestação em contrário de qualquer das partes.
+    <div class="par"><b>Parágrafo Único.</b> A CONTRATADA compromete-se a comunicar formalmente a CONTRATANTE sobre a proximidade da renovação automática do contrato com 30 (trinta) dias de antecedência ao término do prazo vigente. A comunicação será realizada por e-mail. A ausência de manifestação contrária da CONTRATANTE após a notificação será interpretada como concordância com a renovação automática.</div>
+  </div>
+  <div class="cl"><b class="cn">CLÁUSULA 34.</b> Qualquer uma das partes poderá rescindir a prestação de serviços mediante comunicado formal e comprovado, por escrito, com 30 (trinta) dias de antecedência.
+    <div class="par"><b>Parágrafo 1º.</b> Em caso de rescisão do contrato, a CONTRATANTE concorda em efetuar o pagamento antecipado das mensalidades restantes para completar o período de 12 meses de contrato, a serem calculadas com base na mensalidade vigente no momento da rescisão.</div>
+    <div class="par"><b>Parágrafo 2º.</b> Na ocorrência da rescisão, a CONTRATANTE deverá indicar o novo médico coordenador para entrega dos Prontuários Médicos, conforme determina a NR7.</div>
+  </div>
+
+  <div class="sec">Das Disposições Gerais</div>
+  <div class="cl"><b class="cn">CLÁUSULA 35.</b> As partes declaram que possuem plena capacidade e legitimidade para celebrar este CONTRATO, tendo tomado todas as medidas necessárias para autorizar sua celebração. Declaram que este contrato é válido, vinculante e exequível, não viola disposições legais, regulatórias ou judiciais, e que estão agindo com boa fé, probidade e lealdade.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 36.</b> Qualquer tolerância de quaisquer das partes em relação ao descumprimento de qualquer disposição deste instrumento não implicará, em nenhum momento ou sob qualquer circunstância, renúncia aos direitos decorrentes dessas disposições.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 37.</b> Se alguma disposição deste instrumento for considerada inválida, ineficaz ou inexequível, isso não afetará a validade ou exequibilidade das demais disposições.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 38.</b> Este instrumento pode ser reformado ou emendado a qualquer momento, desde que por acordo mútuo das partes, por meio de instrumento escrito com as mesmas formalidades deste contrato.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 39.</b> Este instrumento não cria qualquer forma de sociedade, relação de emprego, responsabilidade solidária, subsidiária ou conjunta entre as partes.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 40.</b> As partes declaram e concordam que este instrumento constitui um título executivo extrajudicial.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 41.</b> Fica eleito o Foro da Comarca de Porto Alegre, Estado do Rio Grande do Sul, como competente para dirimir quaisquer controvérsias decorrentes deste contrato.</div>
+  <div class="cl"><b class="cn">CLÁUSULA 42.</b> E, por estarem assim justas e acordadas, as partes declaram revogado qualquer acordo anterior e sua assinatura é realizada em plataforma digital, com data de vigência vinculada à data de aceite das CONDIÇÕES COMERCIAIS por parte da Contratante.</div>
+</section>
+
+<!-- ===================== ANEXO II · TABELA DE PREÇOS ===================== -->
+<section class="flow brk">
+  <div class="block-head">
+    <span class="logo-teal"></span>
+    <div class="bh-kicker">Contrato de Prestação de Serviços<b>Anexo II · Tabela de Preços</b></div>
+  </div>
+
+  <div class="eyebrow">Anexo II</div>
+  <h1 class="sec-title">Tabela de Preços — Exames e Serviços Complementares 2026 <span style="font-size:10pt;color:var(--ink-3)">v.02</span></h1>
+  <div class="sec-rule"></div>
+
+  {{#if tem_tabela_negociada}}
+  {{tabela_precos_html}}
+  {{else}}
+  <table class="precos">
+    <thead><tr><th>Exames</th><th>Valor (R$)</th></tr></thead>
+    <tbody>
+      <tr><td>ÁCIDO HIPÚRICO</td><td>27,54</td></tr>
+      <tr><td>ÁCIDO METIL HIPÚRICO</td><td>27,54</td></tr>
+      <tr><td>ÁCIDO TRANS TRANS MUCÔNICO</td><td>62,11</td></tr>
+      <tr><td>ACOMPANHAMENTO PSICOLÓGICO OCUPACIONAL</td><td>280,24</td></tr>
+      <tr><td>ACUIDADE VISUAL</td><td>34,52</td></tr>
+      <tr><td>ANTI HBS</td><td>30,29</td></tr>
+      <tr><td>ANTI HCV</td><td>48,30</td></tr>
+      <tr><td>ASO</td><td>69,01</td></tr>
+      <tr><td>AUDIOMETRIA TONAL</td><td>46,26</td></tr>
+      <tr><td>AUDIOMETRIA VOCAL</td><td>37,51</td></tr>
+      <tr><td>AVALIAÇÃO CARDIOLÓGICA</td><td>238,26</td></tr>
+      <tr><td>AVALIAÇÃO CLÍNICA — EXTRA PCMSO</td><td>85,07</td></tr>
+      <tr><td>AVALIAÇÃO DERMATOLÓGICA</td><td>233,26</td></tr>
+      <tr><td>AVALIAÇÃO MÉDICA — RISCOS PSICOSSOCIAIS</td><td>280,84</td></tr>
+      <tr><td>AVALIAÇÃO OFTALMOLÓGICA</td><td>233,24</td></tr>
+      <tr><td>AVALIAÇÃO OTORRINOLARINGOLÓGICA</td><td>233,26</td></tr>
+      <tr><td>AVALIAÇÃO PARA ENQUADRAMENTO PCD/REABILITAÇÃO</td><td>85,05</td></tr>
+      <tr><td>AVALIAÇÃO PSICOLÓGICA OCUPACIONAL</td><td>280,24</td></tr>
+      <tr><td>AVALIAÇÃO PSICOSSOCIAL</td><td>125,07</td></tr>
+      <tr><td>AVALIAÇÃO PSICOSSOCIAL — NR01</td><td>125,07</td></tr>
+      <tr><td>AVALIAÇÃO PSIQUIÁTRICA</td><td>233,26</td></tr>
+      <tr><td>ELETROCARDIOGRAMA — ECG</td><td>60,77</td></tr>
+      <tr><td>ELETROENCEFALOGRAMA — EEG</td><td>67,69</td></tr>
+      <tr><td>ESPIROMETRIA SIMPLES</td><td>44,19</td></tr>
+      <tr><td>EXAME AUDIOMÉTRICO</td><td>32,27</td></tr>
+      <tr><td>EXAME PARASITOLÓGICO FEZES — EPF</td><td>15,19</td></tr>
+      <tr><td>GAMA GT</td><td>15,01</td></tr>
+      <tr><td>GLICEMIA</td><td>15,19</td></tr>
+      <tr><td>HBS AG</td><td>44,60</td></tr>
+      <tr><td>HEMOGRAMA COMPLETO</td><td>19,36</td></tr>
+      <tr><td>HEPATITE A — ANTI HAV — IGG</td><td>68,78</td></tr>
+      <tr><td>HEPATITE A — ANTI HAV — IGM</td><td>55,09</td></tr>
+      <tr><td>HEPATITE B — ANTI HBC — ANTICORPOS IGG</td><td>45,57</td></tr>
+      <tr><td>HEPATITE B — ANTI HBC — ANTICORPOS IGM</td><td>45,57</td></tr>
+      <tr><td>IMPEDANCIOMETRIA</td><td>159,62</td></tr>
+      <tr><td>NÃO COMPARECIMENTO</td><td>69,01</td></tr>
+      <tr><td>RX COLUNA LOMBO-SACRA</td><td>103,29</td></tr>
+      <tr><td>RX TÓRAX OIT 35/35</td><td>138,33</td></tr>
+      <tr><td>REEMISSÃO DE ASO</td><td>30,01</td></tr>
+      <tr><td>REMOÇÃO DE CERÚMEN</td><td>158,26</td></tr>
+      <tr><td>RETICULÓCITOS</td><td>12,44</td></tr>
+      <tr><td>TESTE DE DALTONISMO / ISHIHARA</td><td>37,06</td></tr>
+      <tr><td>TESTE DE ROMBERG (teste de equilíbrio)</td><td>28,75</td></tr>
+      <tr><td>TIPAGEM SANGUÍNEA (RH + ABO)</td><td>20,75</td></tr>
+      <tr><td>TRIAGEM DERMATOLÓGICA</td><td>34,55</td></tr>
+    </tbody>
+  </table>
+
+  <table class="precos" style="margin-top:6mm">
+    <thead><tr><th>Serviços complementares (quando não incluídos na mensalidade)</th><th>Valor (R$)</th></tr></thead>
+    <tbody>
+      <tr><td>ADENDO DE CARGO EM PROGRAMAS E LAUDOS</td><td>390,00</td></tr>
+      <tr><td>ALTERAÇÕES OU REVISÕES NOS PROGRAMAS E LAUDOS (solicitados 10 dias após entrega)</td><td>390,00</td></tr>
+      <tr><td>INCLUSÃO DE CARGO EXCEDENTE NOS PROGRAMAS E LAUDOS (na elaboração)</td><td>190,00</td></tr>
+      <tr><td>INVENTÁRIO PSICOSSOCIAL EXCEDENTE (por funcionário)</td><td>120,00</td></tr>
+      <tr><td>PERÍCIA MÉDICA OU DE ENGENHARIA DE ST</td><td>sob consulta</td></tr>
+      <tr><td>PPP — PERFIL PROFISSIOGRÁFICO PREVIDENCIÁRIO</td><td>140,00</td></tr>
+      <tr><td>REGISTRO MÉDICO PARA CAT</td><td>150,00</td></tr>
+    </tbody>
+  </table>
+
+  <table class="precos" style="margin-top:6mm">
+    <thead><tr><th>Hora técnica especializada</th><th>Valor (R$)</th></tr></thead>
+    <tbody>
+      <tr><td>ENGENHEIRO DE SEGURANÇA DO TRABALHO ESPECIALISTA EM HIGIENE OCUPACIONAL (online)</td><td>350,00</td></tr>
+      <tr><td>ESPECIALISTA EM ERGONOMIA*</td><td>350,00</td></tr>
+      <tr><td>TÉCNICO DE SEGURANÇA DO TRABALHO*</td><td>190,00</td></tr>
+    </tbody>
+  </table>
+  <div class="tbl-note">* Atendimento online ou presencial. Para atendimento presencial a contratação mínima será de 2 horas.</div>
+  {{/if}}
+</section>
+
+<!-- ===================== ACEITE E ASSINATURAS (SEMPRE A ÚLTIMA PÁGINA) ===================== -->
+<section class="page sigpage">
+  <div class="sig-band"></div>
+
+  <div class="sig-head">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6mm">
+      <span class="logo-teal"></span>
+      <div class="eyebrow" style="font-size:8pt">Aceite e Assinaturas</div>
+    </div>
+    <h1 class="sec-title" style="font-size:17pt">Concordância com as Condições Comerciais e com o Contrato</h1>
+    <div class="sec-rule"></div>
+    <div class="accept-card">
+      <span class="kk">Declaração de Aceite</span>
+      <h3>Formalização em um único ato</h3>
+      <p>A empresa <b>{{razao_social}}</b>, inscrita no CNPJ sob o nº <b>{{cnpj}}</b>, neste ato representada por <b>{{rep_legal_nome}}</b> (CPF {{rep_legal_cpf}}), declara estar de acordo com as <b>Condições Comerciais (Anexo I)</b> que integram este documento, bem como com todas as cláusulas e condições do <b>Contrato de Prestação de Serviços</b> e seus Anexos, celebrado com a <b>REALIZA SOLUÇÕES EM MEDICINA E SEGURANÇA DO TRABALHO S/S LTDA</b>, em <b>{{data_aceite}}</b>, autorizando o início dos trabalhos.</p>
+      <div style="font-size:8.5pt;color:var(--ink-3);letter-spacing:.06em">Assinatura eletrônica realizada na plataforma Autentique · Porto Alegre/RS, {{data_extenso}}.</div>
+    </div>
+  </div>
+
+  <div class="sig-anchor">
+    <div class="slot L row1">
+      <div class="line"></div>
+      <div class="name">{{razao_social}}</div>
+      <div class="label">CONTRATANTE · {{rep_legal_nome}} · CPF {{rep_legal_cpf}}</div>
+    </div>
+    <div class="slot R row1">
+      <div class="line"></div>
+      <div class="name">Realiza Soluções em Medicina e Segurança do Trabalho S/S Ltda</div>
+      <div class="label">CONTRATADA</div>
+    </div>
+    <div class="slot L row2">
+      <div class="line"></div>
+      <div class="name">Carmen Caetano</div>
+      <div class="label">TESTEMUNHA 1 · Realiza</div>
+    </div>
+    <div class="slot R row2">
+      <div class="line"></div>
+      <div class="name">{{nome_financeiro}}</div>
+      <div class="label">TESTEMUNHA 2 · {{razao_social}}</div>
+    </div>
+  </div>
+
+  <div class="sig-foot">
+    <span>Realiza · Contrato de Prestação de Serviços</span>
+    <span>{{id_venda}}</span>
+  </div>
+</section>
+
+</body>
+</html>
