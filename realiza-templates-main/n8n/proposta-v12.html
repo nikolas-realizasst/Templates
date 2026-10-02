@@ -425,14 +425,34 @@
         <div class="note">Mensalidade a partir de <b>{{premium_mensalidade}}</b> &middot; sem boleto de exames no mês seguinte.</div>
       </div>
       {{/if}}
+
+      {{#if so_avulso}}
+      <div class="pc">
+        <h4>Serviços avulsos</h4>
+        <div class="kind">Contratação pontual</div>
+        <div class="price">{{total_avulso}}</div>
+        <div class="price-sub">para {{numero_vidas}} colaboradores em {{numero_unidades}} unidade(s)</div>
+        <ul>
+          <li>Programas e laudos do escopo contratado</li>
+          <li>Entrega nos prazos previstos em contrato</li>
+          <li>Parcelamento conforme negociado</li>
+        </ul>
+        <div class="note">Modalidade avulsa &mdash; sem mensalidade e sem gestão contínua. Os planos mensais estão na página anterior.</div>
+      </div>
+      {{/if}}
     </div>
 
     <div class="terms">
       <span class="kk">Condições Comerciais</span>
       <ul>
         <li><b>Validade da proposta:</b> {{validade}}</li>
+        {{#if so_avulso}}
+        <li><b>Contratação pontual</b> &mdash; sem mensalidade e sem renovação automática</li>
+        <li>Pagamento e parcelamento conforme negociado</li>
+        {{else}}
         <li><b>Renovação automática</b> e reajuste anual</li>
         <li>Faturamento mínimo conforme o número de vidas contratado</li>
+        {{/if}}
       </ul>
     </div>
 
