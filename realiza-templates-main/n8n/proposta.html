@@ -323,10 +323,10 @@
     <h3 style="font-size:14pt;font-weight:800;color:var(--teal-deeper);margin:1.5mm 0 0;">Programas e laudos incluídos</h3>
 
     <div class="scope-list">
-      {{#if tem_gro}}
+      {{#if tem_visita}}
       <div class="scope-item">
         <div class="check">✓</div>
-        <div class="text"><strong>{{gro_label}}</strong><small>{{gro_descricao}}</small></div>
+        <div class="text"><strong>{{visita_label}}</strong><small>{{visita_descricao}}</small></div>
       </div>
       {{/if}}
       {{#if tem_pgr}}
@@ -350,13 +350,13 @@
       {{#if tem_ltcat}}
       <div class="scope-item">
         <div class="check">✓</div>
-        <div class="text"><strong>LTCAT</strong><small>Laudo Técnico das Condições Ambientais — com ART</small></div>
+        <div class="text"><strong>LTCAT</strong><small>Laudo Técnico das Condições Ambientais</small></div>
       </div>
       {{/if}}
       {{#if tem_ltip}}
       <div class="scope-item">
         <div class="check">✓</div>
-        <div class="text"><strong>LTIP</strong><small>Laudo Técnico de Insalubridade e Periculosidade — com ART</small></div>
+        <div class="text"><strong>LTIP</strong><small>Laudo Técnico de Insalubridade e Periculosidade</small></div>
       </div>
       {{/if}}
       {{#if tem_manutencao}}
