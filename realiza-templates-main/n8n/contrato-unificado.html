@@ -178,7 +178,8 @@
 
   /* ---------- Página de assinaturas (âncoras fixas · NÃO ALTERAR POSIÇÕES) ----------
      x/y (%) batem com o Autentique (F2 · Enviar para Assinatura):
-       Linhas: row1 = 170mm (57,2%) · row2 = 226mm (76,1%)
+       Linhas: row1 = 170mm (57,2%) · row2 = 250mm (84,2%)
+       row2 desceu 24mm para caber o selo completo do Autentique (SIGNATURE + NAME + CPF)
        Autentique: CONTRATANTE x=16 y=48 | CONTRATADA x=58 y=48 | TEST.1 x=16 y=67 | TEST.2 x=58 y=67 */
   .page.sigpage{
     position:relative !important;
@@ -202,7 +203,7 @@
   .sig-anchor .slot .name{font-size:9.5pt;font-weight:700;color:var(--ink-1);margin-top:1.5mm;line-height:1.25}
   .sig-anchor .slot .label{font-size:7.5pt;color:var(--ink-2);margin-top:.6mm}
   .sig-anchor .slot.L{left:20mm} .sig-anchor .slot.R{left:110mm}
-  .sig-anchor .row1{top:170mm} .sig-anchor .row2{top:226mm}
+  .sig-anchor .row1{top:170mm} .sig-anchor .row2{top:250mm}
   .sigpage .sig-foot{
     position:absolute;left:20mm;right:20mm;bottom:10mm;display:flex;justify-content:space-between;
     font-size:7.5pt;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
