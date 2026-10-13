@@ -439,6 +439,22 @@
       {{/if}}
 
 
+      {{#if tem_misto}}
+      <div class="pc">
+        <h4>Misto</h4>
+        <div class="kind">Programas à parte</div>
+        <div class="price">{{misto_mensalidade}}</div>
+        <div class="price-sub">por mês &middot; {{misto_por_vida}} por vida</div>
+        <ul>
+          <li>Programas e laudos: <b>{{misto_programas}}</b>, faturados à parte</li>
+          <li>Mesmo escopo técnico do Básico</li>
+          <li>PCMSO e controle de vencimentos</li>
+          {{#if tem_mensageria}}<li>Mensageria eSocial</li>{{/if}}
+        </ul>
+        <div class="note">Os programas e laudos são cobrados uma única vez; a mensalidade cobre a gestão contínua. Total no primeiro ano: <b>{{misto_primeiro_ano}}</b>.</div>
+      </div>
+      {{/if}}
+
       {{#if so_avulso}}
       <div class="pc">
         <h4>Serviços avulsos</h4>
