@@ -13,5 +13,12 @@ São imagens ilustrativas. Não mostram pessoas reais da Realiza, então não us
 | `visita-tecnica.jpg` | Técnico de segurança em visita de auditoria | Site: SST por Assinatura |
 | `exame-ocupacional.jpg` | Médica medindo a pressão de um trabalhador | Site: Novo PCMSO |
 | `rh-agendando.jpg` | RH agendando exames pelo celular | Site: Agendamento Fácil |
+| `reuniao-com-dashboard.jpg` | Consultora apresentando painel ao RH | Livre: tecnologia, relatórios |
+| `recepcao-da-clinica.jpg` | Recepção acolhendo trabalhador | Livre: clínica, atendimento |
+| `coleta-de-exame.jpg` | Enfermeira fazendo coleta de sangue | Livre: exames complementares |
+| `audiometria.jpg` | Audiometria em cabine acústica | Livre: exames complementares |
+| `conferencia-de-epi.jpg` | Técnica conferindo EPIs na obra | Livre: EPI, NR-6 |
+| `treinamento-nr35.jpg` | Instrutor de trabalho em altura com turma | Livre: treinamentos de NR |
+| `avaliacao-ergonomica.jpg` | Ergonomista ajustando posto de trabalho | Livre: AET, NR-17 |
 
 As fotos antigas do kit de marca não são mais usadas.
