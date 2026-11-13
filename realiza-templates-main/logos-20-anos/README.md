@@ -1,4 +1,4 @@
-# Logos dos 20 anos (2006–2026)
+# Logos dos 20 anos (2007–2027)
 
 Arquivos oficiais da comemoração dos 20 anos, copiados do SharePoint (site allcompany, arquivos de 26/10/2026).
 
